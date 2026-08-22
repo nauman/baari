@@ -3,119 +3,511 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>baari</title>
+<title>baari — what do I owe?</title>
+<meta name="description" content="One place to see what you owe a reply to — across every repo on your machine. Language- and framework-agnostic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: light dark; }
-  body {
-    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    max-width: 680px;
-    margin: 4rem auto;
-    padding: 0 1.5rem;
-    color: #1a1a1a;
-    background: #fff;
+/* Nodepad design system — tokens copied from the kuickr `nodepad` system
+   (2026-08-16 realignment: Geist, warm paper, amber as punctuation). */
+:root {
+  --np-sans: Geist, "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --np-mono: "Geist Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --np-accent-serif: "Instrument Serif", Georgia, serif;
+
+  --np-bg:            #ffffff;
+  --np-wash:          #faf9f7;
+  --np-paper-runtime: #faf9f7;
+  --np-paper-deep:    #f3f1ed;
+  --np-paper-edge:    #e9e6e0;
+
+  --np-ink:         #0e0d0b;
+  --np-text:        #55504a;
+  --np-muted:       #8c8578;
+  --np-line:        #e9e6e0;
+  --np-line-soft:   #efede8;
+
+  --np-amber:       #e8901a;
+  --np-accent-text: #875006;
+  --np-highlight:      #fdf3d2;
+  --np-highlight-line: #f5e3b4;
+
+  --kind-outcome:  #2fb36b;
+  --kind-parked:   #6b7280;
+
+  --np-reading-wide: 768px;
+  --rad-2: 5px; --rad-3: 8px; --rad-4: 12px; --rad-pill: 999px;
+  --t-base: 200ms;
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --np-bg:            #0e0d0b;
+    --np-wash:          #131110;
+    --np-paper-runtime: #1a1816;
+    --np-paper-deep:    #211e1a;
+    --np-paper-edge:    #3a3833;
+    --np-ink:           #faf9f7;
+    --np-text:          #c9c3b6;
+    --np-line:          #302d29;
+    --np-line-soft:     #262320;
+    --np-accent-text:   #f0a742;
+    --np-highlight:      #2a2418;
+    --np-highlight-line: #4a3f22;
   }
-  @media (prefers-color-scheme: dark) {
-    body { color: #e8e8e8; background: #121212; }
-    code, pre { background: #1e1e1e !important; border-color: #333 !important; }
-    a { color: #7cb9ff; }
-    p.tagline, footer, .note { color: #999 !important; }
-    h2 { border-color: #333 !important; }
-  }
-  h1 { font-size: 2rem; margin-bottom: 0.25rem; }
-  h2 {
-    font-size: 1.1rem;
-    margin-top: 2.5rem;
-    padding-bottom: 0.35rem;
-    border-bottom: 1px solid #e5e5e5;
-  }
-  p.tagline { color: #666; margin-top: 0; font-size: 1.05rem; }
-  pre {
-    background: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 1rem;
-    overflow-x: auto;
-  }
-  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; }
-  dl { margin: 0; }
-  dt {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-weight: 600;
-    margin-top: 1.1rem;
-  }
-  dd { margin: 0.2rem 0 0 0; }
-  .note { color: #666; font-size: 0.95rem; }
-  footer { margin-top: 3.5rem; font-size: 0.875rem; color: #888; }
-  a { color: #0060df; }
+}
+[data-theme="dark"] {
+  --np-bg:            #0e0d0b;
+  --np-wash:          #131110;
+  --np-paper-runtime: #1a1816;
+  --np-paper-deep:    #211e1a;
+  --np-paper-edge:    #3a3833;
+  --np-ink:           #faf9f7;
+  --np-text:          #c9c3b6;
+  --np-line:          #302d29;
+  --np-line-soft:     #262320;
+  --np-accent-text:   #f0a742;
+  --np-highlight:      #2a2418;
+  --np-highlight-line: #4a3f22;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--np-wash);
+  color: var(--np-text);
+  font-family: var(--np-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: var(--np-reading-wide);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- hero ---------- */
+.hero { padding: 96px 0 72px; }
+
+.eyebrow {
+  font-family: var(--np-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--np-muted);
+  margin: 0 0 32px;
+}
+
+h1 {
+  font-family: var(--np-sans);
+  font-weight: 600;
+  font-size: clamp(44px, 8vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--np-ink);
+  margin: 0 0 28px;
+}
+h1 .serif {
+  font-family: var(--np-accent-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--np-accent-text);
+}
+
+.lede {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--np-text);
+  max-width: 58ch;
+  margin: 0 0 12px;
+}
+
+.agnostic {
+  font-size: 14px;
+  color: var(--np-muted);
+  max-width: 58ch;
+  margin: 20px 0 0;
+}
+
+/* ---------- terminal panel ---------- */
+.panel {
+  background: var(--np-bg);
+  border: 1px solid var(--np-line);
+  border-radius: var(--rad-4);
+  overflow: hidden;
+  margin: 40px 0 0;
+}
+.panel-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--np-line-soft);
+  background: var(--np-paper-deep);
+}
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--np-paper-edge); }
+.panel-title {
+  font-family: var(--np-mono);
+  font-size: 11px;
+  color: var(--np-muted);
+  margin-left: 6px;
+}
+.panel pre {
+  margin: 0;
+  padding: 20px;
+  font-family: var(--np-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--np-text);
+  overflow-x: auto;
+}
+.panel .prompt { color: var(--np-muted); }
+.panel .owed { color: var(--np-ink); font-weight: 500; }
+.panel .dim { color: var(--np-muted); }
+.panel .ok { color: var(--kind-outcome); }
+
+/* ---------- sections ---------- */
+section { padding: 64px 0; border-top: 1px solid var(--np-line); }
+
+h2 {
+  font-family: var(--np-sans);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--np-muted);
+  margin: 0 0 32px;
+}
+
+.statement {
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--np-ink);
+  max-width: 54ch;
+  margin: 0 0 20px;
+  letter-spacing: -0.01em;
+}
+.statement em {
+  font-family: var(--np-accent-serif);
+  font-style: italic;
+  color: var(--np-accent-text);
+}
+
+p { max-width: 62ch; }
+
+/* ---------- numbered features ---------- */
+.features { display: grid; gap: 0; }
+.feature {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--np-line-soft);
+}
+.feature:last-child { border-bottom: 0; }
+.feature-num {
+  font-family: var(--np-mono);
+  font-size: 11px;
+  color: var(--np-muted);
+  padding-top: 3px;
+}
+.feature-cmd {
+  font-family: var(--np-mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--np-ink);
+  margin: 0 0 4px;
+}
+.feature-desc { margin: 0; font-size: 14.5px; }
+
+/* ---------- install ---------- */
+.install-block { margin: 0 0 28px; }
+.install-label {
+  font-family: var(--np-mono);
+  font-size: 11px;
+  color: var(--np-muted);
+  margin: 0 0 8px;
+}
+pre.cmd {
+  margin: 0;
+  padding: 14px 16px;
+  background: var(--np-bg);
+  border: 1px solid var(--np-line);
+  border-radius: var(--rad-3);
+  font-family: var(--np-mono);
+  font-size: 12.5px;
+  color: var(--np-ink);
+  overflow-x: auto;
+}
+
+code.inline {
+  font-family: var(--np-mono);
+  font-size: 0.88em;
+  background: var(--np-paper-deep);
+  border: 1px solid var(--np-line-soft);
+  border-radius: var(--rad-2);
+  padding: 1px 5px;
+  color: var(--np-ink);
+}
+
+/* ---------- status table ---------- */
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th {
+  text-align: left;
+  font-family: var(--np-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--np-muted);
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--np-line);
+}
+td { padding: 12px 0; border-bottom: 1px solid var(--np-line-soft); vertical-align: top; }
+td:first-child { font-family: var(--np-mono); font-size: 13px; color: var(--np-ink); width: 40%; }
+.badge {
+  display: inline-block;
+  font-family: var(--np-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: var(--rad-pill);
+  border: 1px solid;
+}
+.badge-shipped { color: var(--kind-outcome); border-color: color-mix(in srgb, var(--kind-outcome) 40%, transparent); }
+.badge-coming  { color: var(--kind-parked);  border-color: color-mix(in srgb, var(--kind-parked) 40%, transparent); }
+
+/* ---------- not-list ---------- */
+.not-list { list-style: none; padding: 0; margin: 0; max-width: 62ch; }
+.not-list li {
+  padding: 10px 0 10px 22px;
+  position: relative;
+  border-bottom: 1px solid var(--np-line-soft);
+  font-size: 14.5px;
+}
+.not-list li:last-child { border-bottom: 0; }
+.not-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--np-muted);
+}
+
+/* ---------- callout ---------- */
+.callout {
+  border-left: 2px solid var(--np-amber);
+  background: var(--np-highlight);
+  padding: 16px 20px;
+  border-radius: 0 var(--rad-3) var(--rad-3) 0;
+  margin: 28px 0 0;
+  font-size: 14.5px;
+  max-width: 62ch;
+}
+.callout p { margin: 0; }
+
+/* ---------- footer ---------- */
+footer {
+  border-top: 1px solid var(--np-line);
+  padding: 40px 0 64px;
+  font-size: 13px;
+  color: var(--np-muted);
+}
+footer a { color: var(--np-text); text-decoration: none; border-bottom: 1px solid var(--np-line); }
+footer a:hover { color: var(--np-ink); border-color: var(--np-muted); }
+.footer-row { display: flex; gap: 20px; flex-wrap: wrap; margin: 0 0 16px; }
+
+a { color: var(--np-accent-text); }
+
+@media (max-width: 560px) {
+  .hero { padding: 64px 0 48px; }
+  section { padding: 48px 0; }
+  .feature { grid-template-columns: 32px 1fr; gap: 12px; }
+  td:first-child { width: auto; }
+}
 </style>
 </head>
 <body>
-  <h1>baari</h1>
-  <p class="tagline">
-    One place to see what you owe a reply to — across every repo on your machine.
-  </p>
 
-  <p>
-    Working across several repos means coordination state is scattered: a note here,
-    a thread there, a script in each project that only knows about itself. baari keeps
-    a machine-local registry of the repos you work in and gives you one view over all
-    of them.
-  </p>
+<div class="wrap">
 
-  <p class="note">
-    Language- and framework-agnostic. It reads conventions in your repo, not your
-    code — so it works the same whether a project is Rails, Go, Node, Python, or
-    plain documentation.
-  </p>
+  <header class="hero">
+    <p class="eyebrow">baari</p>
+    <h1>What<br>do I<br><span class="serif">owe?</span></h1>
+    <p class="lede">
+      baari keeps one machine-local registry of every repo you work in, and gives you a
+      single view of what you owe a reply to — and what you're waiting on others for.
+    </p>
+    <p class="agnostic">
+      Language- and framework-agnostic. It reads conventions in your repo, not your code —
+      the same whether a project is Rails, Go, Node, Python, or plain documentation.
+    </p>
 
-  <h2>Install</h2>
-  <p>Via Homebrew:</p>
-  <pre><code>brew install nauman/tap/baari</code></pre>
+    <div class="panel">
+      <div class="panel-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="panel-title">baari next</span>
+      </div>
+<pre><span class="prompt">$</span> baari next
 
-  <p>Without Homebrew:</p>
-  <pre><code>curl --proto '=https' --tlsv1.2 -fsSL https://nauman.github.io/baari/install.sh | sh</code></pre>
+<span class="owed">OWED BY ME (2)</span>
+  <span class="dim">~/code/api</span>       threads/rate-limit-design      <span class="dim">4d</span>
+  <span class="dim">~/code/web</span>       threads/session-cookie-scope   <span class="dim">1d</span>
 
-  <h2>What it does</h2>
-  <dl>
-    <dt>baari status</dt>
-    <dd>Cross-repo view of what you owe a reply to, and what you're waiting on others for.</dd>
+<span class="dim">4 repos registered · 1 waiting on others · </span><span class="ok">0 stale</span></pre>
+    </div>
+  </header>
 
-    <dt>baari next</dt>
-    <dd>Just what's owed right now, across every registered repo — nothing else.</dd>
+  <section>
+    <h2>The problem</h2>
+    <p class="statement">
+      Coordination state scatters. A note here, a thread there, a script in each project
+      that only knows about <em>itself</em>.
+    </p>
+    <p>
+      Once you're working across several repos, there's no single place to ask the only
+      question that matters when you sit down: what's actually waiting on me? You end up
+      checking five directories by hand, or trusting memory.
+    </p>
+  </section>
 
-    <dt>baari registry</dt>
-    <dd>List, prune, forget, or ignore the repos baari knows about. Repos register
-      themselves the first time you run baari inside one — no manual setup step.</dd>
+  <section>
+    <h2>What it does</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-num">01</div>
+        <div>
+          <p class="feature-cmd">baari status</p>
+          <p class="feature-desc">Cross-repo view of what you owe a reply to, and what you're waiting on others for.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-num">02</div>
+        <div>
+          <p class="feature-cmd">baari next</p>
+          <p class="feature-desc">Just what's owed right now, across every registered repo. Nothing else.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-num">03</div>
+        <div>
+          <p class="feature-cmd">baari registry</p>
+          <p class="feature-desc">List, prune, forget, or ignore the repos baari knows about. Repos register themselves the first time you run baari inside one — there is no manual setup step.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-num">04</div>
+        <div>
+          <p class="feature-cmd">baari doctor</p>
+          <p class="feature-desc">Validate machine and repo state: registry integrity, identity, and convention markers.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-num">05</div>
+        <div>
+          <p class="feature-cmd">baari thread</p>
+          <p class="feature-desc">Inspect and scaffold coordination threads, and flag ownership assigned to names that don't exist in the owning repo.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-num">06</div>
+        <div>
+          <p class="feature-cmd">baari whoami</p>
+          <p class="feature-desc">Show the identity baari resolves for "who is me", and where it came from.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <dt>baari doctor</dt>
-    <dd>Validate machine and repo state: registry integrity, identity, and
-      convention markers.</dd>
+  <section>
+    <h2>Install</h2>
 
-    <dt>baari thread</dt>
-    <dd>Inspect and scaffold coordination threads, and flag ownership assigned to
-      names that don't exist in the owning repo.</dd>
+    <div class="install-block">
+      <p class="install-label">Homebrew</p>
+      <pre class="cmd">brew install nauman/tap/baari</pre>
+    </div>
 
-    <dt>baari whoami</dt>
-    <dd>Show the identity baari resolves for "who is me", and where it came from.</dd>
-  </dl>
+    <div class="install-block">
+      <p class="install-label">Without Homebrew</p>
+      <pre class="cmd">curl --proto '=https' --tlsv1.2 -fsSL https://nauman.github.io/baari/install.sh | sh</pre>
+    </div>
 
-  <h2>Configuration</h2>
-  <p>
-    baari ships mechanism, not opinions. Checks read their thresholds from a
-    <code>.baari.yml</code> in your repo root, so nothing project-specific is
-    compiled into the binary. With no config file, checks run with zero
-    allowances and warn rather than fail.
-  </p>
+    <div class="install-block">
+      <p class="install-label">First run</p>
+      <pre class="cmd">baari identity set &lt;your-alias&gt;
+baari status</pre>
+    </div>
+  </section>
 
-  <h2>Source</h2>
-  <p>
-    Binaries here are compiled from a private source repository and published on
-    every tagged release.
-  </p>
+  <section>
+    <h2>Configuration</h2>
+    <p class="statement">
+      The tool ships mechanism. Your repo owns its <em>canon</em>.
+    </p>
+    <p>
+      Checks read their thresholds from a <code class="inline">.baari.yml</code> at your repo
+      root, walked up from the working directory. Nothing project-specific is compiled into
+      the binary — no vocabulary, no paths, no rules of ours.
+    </p>
+    <div class="callout">
+      <p>
+        With no config file, every check runs with zero allowances and warns rather than
+        fails. A tool that fails on first run in a stranger's repo is hostile; one that
+        stays silent is useless. Use <code class="inline">--strict</code> in CI to give it teeth.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Status</h2>
+    <table>
+      <thead>
+        <tr><th>Capability</th><th>State</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Cross-repo registry</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>status / next</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>identity / whoami</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>doctor</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>thread lint / scaffold</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>thread writes</td><td><span class="badge badge-coming">coming</span></td></tr>
+        <tr><td>docs-drift checks</td><td><span class="badge badge-coming">coming</span></td></tr>
+        <tr><td>integrations registry</td><td><span class="badge badge-coming">coming</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>What baari is not</h2>
+    <ul class="not-list">
+      <li>Not a task manager. It reports what your repos already say, and invents no work of its own.</li>
+      <li>Not a server. Everything is local; there is no account, no sync, and no network call.</li>
+      <li>Not framework-specific. It never reads your source code, only repo conventions.</li>
+      <li>Not opinionated by default. With no config, it warns and allows nothing to fail.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Source</h2>
+    <p>
+      Binaries here are compiled from a private source repository and published on every
+      tagged release.
+    </p>
+  </section>
 
   <footer>
-    <a href="https://github.com/nauman/baari/releases">Releases</a>
-    · <a href="https://github.com/nauman/baari">GitHub</a>
+    <div class="footer-row">
+      <a href="https://github.com/nauman/baari/releases">Releases</a>
+      <a href="https://github.com/nauman/baari">GitHub</a>
+      <a href="https://nauman.github.io/baari/install.sh">install.sh</a>
+    </div>
+    <div>baari — cross-repo agent coordination.</div>
   </footer>
+
+</div>
+
 </body>
 </html>
