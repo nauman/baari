@@ -4,7 +4,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>baari — what do I owe?</title>
-<meta name="description" content="One place to see what you owe a reply to — across every repo on your machine. Language- and framework-agnostic.">
+<meta name="description" content="A command-line tool that keeps one registry of every repo you work in, then shows what you owe a reply to and what you're waiting on. Local-only, framework-agnostic, macOS and Linux.">
+<link rel="canonical" href="https://nauman.github.io/baari/">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#faf9f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0d0b" media="(prefers-color-scheme: dark)">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="baari">
+<meta property="og:url" content="https://nauman.github.io/baari/">
+<meta property="og:title" content="baari — what do I owe?">
+<meta property="og:description" content="One view of what you owe a reply to, across every repo on your machine. Registers repos automatically, runs entirely locally, and reads conventions rather than code — so it works the same in any language.">
+<meta property="og:image" content="https://nauman.github.io/baari/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="baari — What do I owe? One view of what you owe a reply to, across every repo on your machine.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="baari — what do I owe?">
+<meta name="twitter:description" content="One view of what you owe a reply to, across every repo on your machine. Local-only, framework-agnostic, macOS and Linux.">
+<meta name="twitter:image" content="https://nauman.github.io/baari/og-image.png">
+<meta name="twitter:image:alt" content="baari — What do I owe? One view of what you owe a reply to, across every repo on your machine.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -110,13 +133,32 @@ body {
   margin: 0 0 32px;
 }
 
-.eyebrow {
-  font-family: var(--np-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--np-muted);
+/* Wordmark. Sans (Geist), tight tracking, ink — the one place the name is
+   set as a mark rather than as running text. */
+.wordmark {
+  font-family: var(--np-sans);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  color: var(--np-ink);
   margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.wordmark-glyph {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--rad-2);
+  background: var(--np-ink);
+  color: var(--np-bg);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: 0;
+  flex: none;
 }
 
 /* Theme toggle. Ink, not amber — amber is punctuation, never a control. */
@@ -198,6 +240,75 @@ h1 .serif {
   color: var(--np-muted);
   max-width: 58ch;
   margin: 20px 0 0;
+}
+
+/* Hero CTA. Primary action is ink, never amber (token rule 2). */
+.cta {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 32px 0 0;
+}
+.cta-cmd {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--np-bg);
+  border: 1px solid var(--np-line);
+  border-radius: var(--rad-3);
+  padding: 0 6px 0 14px;
+  font-family: var(--np-mono);
+  font-size: 12.5px;
+  color: var(--np-ink);
+  min-height: 42px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.cta-cmd code {
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 4px 0;
+}
+.copy-btn {
+  font-family: var(--np-mono);
+  font-size: 11px;
+  color: var(--np-muted);
+  background: var(--np-paper-deep);
+  border: 1px solid var(--np-line);
+  border-radius: var(--rad-2);
+  padding: 5px 10px;
+  cursor: pointer;
+  flex: none;
+  transition: color var(--t-base) var(--ease-out),
+              border-color var(--t-base) var(--ease-out);
+}
+.copy-btn:hover { color: var(--np-ink); border-color: var(--np-muted); }
+.copy-btn:focus-visible { outline: 2px solid var(--np-accent-text); outline-offset: 2px; }
+.copy-btn.copied { color: var(--kind-outcome); border-color: color-mix(in srgb, var(--kind-outcome) 40%, transparent); }
+
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: var(--rad-3);
+  background: var(--np-ink);
+  color: var(--np-bg);
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--np-ink);
+  transition: opacity var(--t-base) var(--ease-out);
+}
+.cta-link:hover { opacity: 0.85; }
+.cta-link:focus-visible { outline: 2px solid var(--np-accent-text); outline-offset: 2px; }
+
+.cta-note {
+  font-family: var(--np-mono);
+  font-size: 11px;
+  color: var(--np-muted);
+  margin: 12px 0 0;
 }
 
 /* ---------- terminal panel ---------- */
@@ -403,7 +514,9 @@ a { color: var(--np-accent-text); }
 
   <header class="hero">
     <div class="topbar">
-      <p class="eyebrow">baari</p>
+      <a class="wordmark" href="https://nauman.github.io/baari/">
+        <span class="wordmark-glyph" aria-hidden="true">b</span>baari
+      </a>
       <button class="theme-toggle" id="theme-toggle" type="button" aria-live="polite">
         <svg class="icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <circle cx="12" cy="12" r="4"/>
@@ -425,6 +538,15 @@ a { color: var(--np-accent-text); }
       Language- and framework-agnostic. It reads conventions in your repo, not your code —
       the same whether a project is Rails, Go, Node, Python, or plain documentation.
     </p>
+
+    <div class="cta">
+      <div class="cta-cmd">
+        <code id="install-cmd">brew install nauman/tap/baari</code>
+        <button class="copy-btn" id="copy-btn" type="button" aria-label="Copy install command">copy</button>
+      </div>
+      <a class="cta-link" href="#install">All install options</a>
+    </div>
+    <p class="cta-note">macOS and Linux · no account, no network calls</p>
 
     <div class="panel">
       <div class="panel-bar">
@@ -502,7 +624,7 @@ a { color: var(--np-accent-text); }
     </div>
   </section>
 
-  <section>
+  <section id="install">
     <h2>Install</h2>
 
     <div class="install-block">
@@ -537,6 +659,35 @@ baari status</pre>
         With no config file, every check runs with zero allowances and warns rather than
         fails. A tool that fails on first run in a stranger's repo is hostile; one that
         stays silent is useless. Use <code class="inline">--strict</code> in CI to give it teeth.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Where the conventions come from</h2>
+    <p class="statement">
+      The binary is framework-agnostic. The <em>practice</em> behind it is not.
+    </p>
+    <p>
+      baari was extracted from a working Rails codebase and the private documentation
+      library that governs it — a library whose written canon is heavily Rails-shaped:
+      Ruby style and application organization, service-object and dependency-injection
+      guidance, activity-based authorization, testing patterns, performance playbooks,
+      Hotwire and Stimulus conventions, and a CI baseline (RuboCop omakase + performance,
+      Brakeman, bundler-audit, importmap audit) that projects inherit rather than reinvent.
+    </p>
+    <p>
+      That lineage matters for one practical reason: the conventions baari checks were
+      pressure-tested somewhere real before they were generalised. Repo threads, roster
+      identities, and ADR registers all earned their shape in day-to-day Rails work with
+      CI actually gating on them.
+    </p>
+    <div class="callout">
+      <p>
+        <strong>What that does not mean:</strong> baari has no Rails-specific commands and
+        never parses Ruby. A Go, Node, or documentation repo gets identical behaviour. Rails
+        teams simply start further ahead, because the surrounding practice is already
+        written down for that stack — the tool enforces structure either way.
       </p>
     </div>
   </section>
@@ -623,6 +774,23 @@ baari status</pre>
     else if (mq.addListener) mq.addListener(onChange);
 
     syncLabel();
+  })();
+
+  (function () {
+    var btn = document.getElementById("copy-btn");
+    var cmd = document.getElementById("install-cmd");
+    if (!btn || !cmd || !navigator.clipboard) return;
+
+    btn.addEventListener("click", function () {
+      navigator.clipboard.writeText(cmd.textContent.trim()).then(function () {
+        btn.textContent = "copied";
+        btn.classList.add("copied");
+        setTimeout(function () {
+          btn.textContent = "copy";
+          btn.classList.remove("copied");
+        }, 1600);
+      }).catch(function () { /* clipboard denied — the text is selectable anyway */ });
+    });
   })();
 </script>
 

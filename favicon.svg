@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#0e0d0b"/>
+  <text x="32" y="33" fill="#faf9f7"
+        font-family="Geist, Inter, system-ui, -apple-system, sans-serif"
+        font-size="42" font-weight="700"
+        text-anchor="middle" dominant-baseline="central">b</text>
+</svg>
