@@ -73,8 +73,23 @@ main() {
   curl --proto '=https' --tlsv1.2 -fsSL "${latest_url}/checksums.txt" -o "${work}/checksums.txt" \
     || fail "download failed for checksums.txt"
 
-  ( cd "$work" && grep " ${archive}\$" checksums.txt | shasum -a 256 -c - >/dev/null 2>&1 ) \
-    || fail "checksum verification failed for ${archive}"
+  # macOS ships `shasum` (perl); most Linux distros ship `sha256sum` and have no
+  # `shasum` at all. Resolve the checker BEFORE using it, so a missing tool
+  # reports itself instead of surfacing as "checksum verification failed" —
+  # which reads like a tampered download rather than a missing dependency.
+  if command -v sha256sum >/dev/null 2>&1; then
+    sha_check() { sha256sum -c - >/dev/null 2>&1; }
+  elif command -v shasum >/dev/null 2>&1; then
+    sha_check() { shasum -a 256 -c - >/dev/null 2>&1; }
+  else
+    fail "need 'sha256sum' or 'shasum' to verify the download; install either and re-run"
+  fi
+
+  expected="$(grep " ${archive}\$" "${work}/checksums.txt" || true)"
+  [ -n "$expected" ] || fail "no checksum listed for ${archive} in checksums.txt"
+
+  ( cd "$work" && printf '%s\n' "$expected" | sha_check ) \
+    || fail "checksum verification failed for ${archive} — refusing to install"
 
   tar -xzf "${work}/${archive}" -C "$work" "$BIN_NAME"
   chmod +x "${work}/${BIN_NAME}"

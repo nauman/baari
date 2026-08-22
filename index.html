@@ -551,15 +551,25 @@ a { color: var(--np-accent-text); }
     <div class="panel">
       <div class="panel-bar">
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="panel-title">baari next</span>
+        <span class="panel-title">baari status</span>
       </div>
-<pre><span class="prompt">$</span> baari next
+<pre><span class="prompt">$</span> baari status
 
-<span class="owed">OWED BY ME (2)</span>
-  <span class="dim">~/code/api</span>       threads/rate-limit-design      <span class="dim">4d</span>
-  <span class="dim">~/code/web</span>       threads/session-cookie-scope   <span class="dim">1d</span>
+Baari status -- identity: claude
 
-<span class="dim">4 repos registered · 1 waiting on others · </span><span class="ok">0 stale</span></pre>
+<span class="owed">OWED BY ME (0)</span>
+- none
+
+<span class="owed">WAITING ON OTHERS (4)</span>
+- [dev-docs/decision-record] metz-ratchet-common-layer | awaiting=dev-docs agent
+- [dev-docs/decision-record] shared-checkout-safety | awaiting=dev-docs agent
+- [dev-docs/decision-record] situation-surface | awaiting=operator
+- [dev-docs/decision-record] source-taxonomy | awaiting=codex
+
+<span class="owed">PARKED (1)</span>
+- [dev-docs/decision-record] threads-convention | awaiting=-
+
+<span class="dim">Next action: do not sit idle; report who each thread is waiting on.</span></pre>
     </div>
   </header>
 
@@ -645,20 +655,22 @@ baari status</pre>
   </section>
 
   <section>
-    <h2>Configuration</h2>
+    <h2>Design principle</h2>
     <p class="statement">
-      The tool ships mechanism. Your repo owns its <em>canon</em>.
+      The tool will ship mechanism. Your repo will own its <em>canon</em>.
     </p>
     <p>
-      Checks read their thresholds from a <code class="inline">.baari.yml</code> at your repo
-      root, walked up from the working directory. Nothing project-specific is compiled into
-      the binary — no vocabulary, no paths, no rules of ours.
+      Nothing project-specific gets compiled into the binary — no vocabulary, no paths, no
+      rules of ours. Every check compares a repo against itself, and thresholds come from a
+      repo-local config file.
     </p>
     <div class="callout">
       <p>
-        With no config file, every check runs with zero allowances and warns rather than
-        fails. A tool that fails on first run in a stranger's repo is hostile; one that
-        stays silent is useless. Use <code class="inline">--strict</code> in CI to give it teeth.
+        <strong>Not built yet.</strong> There is no config file and no
+        <code class="inline">--strict</code> flag in v0.1.0 — today's commands take flags and
+        read repo structure directly. This is the committed shape for the docs-drift checks
+        listed as <em>coming</em> below, recorded here so the contract is public before the
+        code exists.
       </p>
     </div>
   </section>
@@ -716,8 +728,8 @@ baari status</pre>
     <ul class="not-list">
       <li>Not a task manager. It reports what your repos already say, and invents no work of its own.</li>
       <li>Not a server. Everything is local; there is no account, no sync, and no network call.</li>
-      <li>Not framework-specific. It never reads your source code, only repo conventions.</li>
-      <li>Not opinionated by default. With no config, it warns and allows nothing to fail.</li>
+      <li>Not a code linter. It reads repo structure and coordination files — never your source.</li>
+      <li>Not neutral. It has opinions about how a repo should be structured, and those opinions came from somewhere specific. Config tunes thresholds and exemptions, not the opinion itself.</li>
     </ul>
   </section>
 
