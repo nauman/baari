@@ -728,7 +728,7 @@ baari status</pre>
       Brakeman, bundler-audit, importmap audit) that projects inherit rather than reinvent.
     </p>
     <p>
-      That lineage matters for one practical reason: the conventions baari checks were
+      That lineage matters for one practical reason: the conventions baari reports on were
       pressure-tested somewhere real before they were generalised. Repo threads, roster
       identities, and ADR registers all earned their shape in day-to-day Rails work with
       CI actually gating on them.
@@ -738,7 +738,35 @@ baari status</pre>
         <strong>What that does not mean:</strong> baari has no Rails-specific commands and
         never parses Ruby. A Go, Node, or documentation repo gets identical behaviour. Rails
         teams simply start further ahead, because the surrounding practice is already
-        written down for that stack — the tool enforces structure either way.
+        written down for that stack.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>The docs harness</h2>
+    <p class="statement">
+      The harness is a set of home-made shell scripts. baari does not ship it <em>yet</em>.
+    </p>
+    <p>
+      The structure baari reports on — numbered plan slots, an agent roster, threads, an
+      ADR register — is created and validated today by a handful of bash scripts:
+      a scaffolder, a doctor that is read-only unless you pass
+      <code class="inline">--fix</code>, a strict CI gate, and a slot generator. They work
+      well and they predate the CLI.
+    </p>
+    <p>
+      They also live in the private repo and read its templates directly, which means
+      <strong>they are not usable from the public binary today.</strong> Saying otherwise
+      would be the kind of drift this whole toolchain exists to catch.
+    </p>
+    <div class="callout">
+      <p>
+        <strong>The plan, deliberately slow:</strong> scripts migrate into baari one at a
+        time, and only when one next needs a real change — never as a big-bang rewrite.
+        The two worth having first are the ones you would actually feel: generating a docs
+        skeleton for a fresh repo, and a doctor that tells you where an existing tree has
+        drifted. Those are the target; neither is in v0.1.0.
       </p>
     </div>
   </section>
@@ -782,6 +810,14 @@ baari status</pre>
         <tr>
           <td>Thread writes — reply, park, close from the CLI</td>
           <td><span class="badge badge-coming">specified</span></td>
+        </tr>
+        <tr>
+          <td>Docs skeleton generator — scaffold a fresh repo's docs tree</td>
+          <td><span class="badge badge-idea">intent</span></td>
+        </tr>
+        <tr>
+          <td>Docs doctor — report where an existing tree has drifted</td>
+          <td><span class="badge badge-idea">intent</span></td>
         </tr>
         <tr>
           <td>Docs-drift checks — twins, generated, owners, sources</td>
