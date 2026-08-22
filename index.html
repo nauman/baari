@@ -311,6 +311,21 @@ h1 .serif {
   margin: 12px 0 0;
 }
 
+.status-strip {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin: 36px 0 0;
+  padding: 18px 20px;
+  background: var(--np-paper-deep);
+  border: 1px solid var(--np-line);
+  border-radius: var(--rad-3);
+  max-width: 62ch;
+}
+.status-strip p { margin: 0; font-size: 14px; }
+.status-strip .badge { flex: none; margin-top: 2px; }
+.status-strip strong { color: var(--np-ink); font-weight: 600; }
+
 /* ---------- terminal panel ---------- */
 .panel {
   background: var(--np-bg);
@@ -458,6 +473,15 @@ td:first-child { font-family: var(--np-mono); font-size: 13px; color: var(--np-i
 }
 .badge-shipped { color: var(--kind-outcome); border-color: color-mix(in srgb, var(--kind-outcome) 40%, transparent); }
 .badge-coming  { color: var(--kind-parked);  border-color: color-mix(in srgb, var(--kind-parked) 40%, transparent); }
+.badge-idea    { color: var(--np-accent-text); border-color: color-mix(in srgb, var(--np-amber) 45%, transparent); }
+
+.table-note {
+  font-size: 13px;
+  color: var(--np-muted);
+  margin: 18px 0 0;
+  max-width: 62ch;
+}
+.table-note .badge { margin: 0 2px; }
 
 /* ---------- not-list ---------- */
 .not-list { list-style: none; padding: 0; margin: 0; max-width: 62ch; }
@@ -547,6 +571,17 @@ a { color: var(--np-accent-text); }
       <a class="cta-link" href="#install">All install options</a>
     </div>
     <p class="cta-note">macOS and Linux · no account, no network calls</p>
+
+    <div class="status-strip">
+      <span class="badge badge-shipped">v0.1.0</span>
+      <p>
+        <strong>Today baari reads and reports — it does not write.</strong> The registry,
+        the cross-repo view, doctor and the roster lint all work. Everything that mutates
+        your repo, watches it, or acts on your behalf is still ahead. The direction is an
+        opinionated framework, and the sections below mark honestly what exists and what
+        does not.
+      </p>
+    </div>
 
     <div class="panel">
       <div class="panel-bar">
@@ -705,7 +740,7 @@ baari status</pre>
   </section>
 
   <section>
-    <h2>Status</h2>
+    <h2>What exists today</h2>
     <table>
       <thead>
         <tr><th>Capability</th><th>State</th></tr>
@@ -716,20 +751,79 @@ baari status</pre>
         <tr><td>identity / whoami</td><td><span class="badge badge-shipped">shipped</span></td></tr>
         <tr><td>doctor</td><td><span class="badge badge-shipped">shipped</span></td></tr>
         <tr><td>thread lint / scaffold</td><td><span class="badge badge-shipped">shipped</span></td></tr>
-        <tr><td>thread writes</td><td><span class="badge badge-coming">coming</span></td></tr>
-        <tr><td>docs-drift checks</td><td><span class="badge badge-coming">coming</span></td></tr>
-        <tr><td>integrations registry</td><td><span class="badge badge-coming">coming</span></td></tr>
+        <tr><td>thread reads</td><td><span class="badge badge-shipped">shipped</span></td></tr>
       </tbody>
     </table>
+    <p class="table-note">
+      All read-only. Nothing above modifies a repo, and there is no config file, no
+      <code class="inline">--strict</code>, and no daemon in v0.1.0.
+    </p>
+  </section>
+
+  <section>
+    <h2>Where this is going</h2>
+    <p class="statement">
+      The goal is an opinionated framework, not a reporter that stays <em>polite</em>.
+    </p>
+    <p>
+      Stated plainly so nobody buys a roadmap as a product: none of the following is
+      built. Some is specified in the private repo's backlog and decision records; some
+      is intent with no spec yet. Both are labelled.
+    </p>
+    <table>
+      <thead>
+        <tr><th>Direction</th><th>State</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Thread writes — reply, park, close from the CLI</td>
+          <td><span class="badge badge-coming">specified</span></td>
+        </tr>
+        <tr>
+          <td>Docs-drift checks — twins, generated, owners, sources</td>
+          <td><span class="badge badge-coming">specified</span></td>
+        </tr>
+        <tr>
+          <td>Repo-local config + <code class="inline">--strict</code> for CI</td>
+          <td><span class="badge badge-coming">specified</span></td>
+        </tr>
+        <tr>
+          <td>A watch loop with a stuck-detector</td>
+          <td><span class="badge badge-coming">specified</span></td>
+        </tr>
+        <tr>
+          <td>Listener — react to repo and CI change, notify the terminal</td>
+          <td><span class="badge badge-idea">intent</span></td>
+        </tr>
+        <tr>
+          <td>Spawn agents for review, with fallback when one is exhausted</td>
+          <td><span class="badge badge-idea">intent</span></td>
+        </tr>
+        <tr>
+          <td>Integrations and local ecosystem registries</td>
+          <td><span class="badge badge-coming">specified</span></td>
+        </tr>
+        <tr>
+          <td>Runbooks — addressable procedures with run evidence</td>
+          <td><span class="badge badge-coming">specified</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="table-note">
+      <span class="badge badge-coming">specified</span> has a written backlog item or
+      decision record behind it. <span class="badge badge-idea">intent</span> is a
+      direction that has been decided but not yet specified — treat it as weaker.
+    </p>
   </section>
 
   <section>
     <h2>What baari is not</h2>
     <ul class="not-list">
       <li>Not a task manager. It reports what your repos already say, and invents no work of its own.</li>
-      <li>Not a server. Everything is local; there is no account, no sync, and no network call.</li>
+      <li>Not a service. Everything runs on your machine — no account, no sync, no network call. That one is a commitment, not just a description of v0.1.0.</li>
       <li>Not a code linter. It reads repo structure and coordination files — never your source.</li>
-      <li>Not neutral. It has opinions about how a repo should be structured, and those opinions came from somewhere specific. Config tunes thresholds and exemptions, not the opinion itself.</li>
+      <li>Not neutral, and not trying to be. It has opinions about how a repo should be structured, and those opinions came from somewhere specific. The plan is for local config to tune thresholds and exemptions — never to negotiate the opinion itself.</li>
+      <li>Not finished. See the two tables above before depending on it for anything.</li>
     </ul>
   </section>
 
