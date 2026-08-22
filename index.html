@@ -138,27 +138,31 @@ body {
 .wordmark {
   font-family: var(--np-sans);
   font-weight: 700;
-  font-size: 15px;
-  letter-spacing: -0.02em;
+  font-size: 22px;
+  letter-spacing: -0.025em;
   color: var(--np-ink);
   margin: 0;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 11px;
   text-decoration: none;
 }
 .wordmark-glyph {
-  width: 20px;
-  height: 20px;
-  border-radius: var(--rad-2);
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
   background: var(--np-ink);
   color: var(--np-bg);
-  font-size: 12px;
+  font-size: 19px;
   font-weight: 700;
-  line-height: 20px;
+  line-height: 30px;
   text-align: center;
   letter-spacing: 0;
   flex: none;
+}
+@media (max-width: 560px) {
+  .wordmark { font-size: 19px; gap: 9px; }
+  .wordmark-glyph { width: 26px; height: 26px; font-size: 16px; line-height: 26px; }
 }
 
 /* Theme toggle. Ink, not amber — amber is punctuation, never a control. */
