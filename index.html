@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>baari</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    max-width: 640px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+    color: #1a1a1a;
+    background: #fff;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { color: #e8e8e8; background: #121212; }
+    code, pre { background: #1e1e1e !important; border-color: #333 !important; }
+    a { color: #7cb9ff; }
+  }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  p.tagline { color: #666; margin-top: 0; }
+  pre {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  footer { margin-top: 3rem; font-size: 0.875rem; color: #888; }
+  a { color: #0060df; }
+</style>
+</head>
+<body>
+  <h1>baari</h1>
+  <p class="tagline">Cross-repo agent coordination — the ~/.agents registry and thread monitor.</p>
+
+  <h2>Install</h2>
+  <p>Via Homebrew:</p>
+  <pre><code>brew install nauman/tap/baari</code></pre>
+
+  <p>Without Homebrew:</p>
+  <pre><code>curl --proto '=https' --tlsv1.2 -fsSL https://nauman.github.io/baari-cli-releases/install.sh | sh</code></pre>
+
+  <h2>Source</h2>
+  <p>
+    Binaries here are compiled from a private source repository and published
+    on every tagged release. The binary ships generic mechanism only — no
+    project-specific canon — configured per repo via <code>.baari.yml</code>.
+  </p>
+
+  <footer>
+    <a href="https://github.com/nauman/baari-cli-releases/releases">Releases</a>
+    · <a href="https://github.com/nauman/baari-cli-releases">GitHub</a>
+  </footer>
+</body>
+</html>
