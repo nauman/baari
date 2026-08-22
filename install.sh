@@ -1,15 +1,15 @@
 #!/bin/sh
 # baari installer — no Homebrew required.
 #
-#   curl --proto '=https' --tlsv1.2 -fsSL https://nauman.github.io/baari-cli-releases/install.sh | sh
+#   curl --proto '=https' --tlsv1.2 -fsSL https://nauman.github.io/baari/install.sh | sh
 #
-# Downloads the latest release from github.com/nauman/baari-cli-releases,
+# Downloads the latest release from github.com/nauman/baari,
 # verifies its checksum, and installs the `baari` binary to a directory on
 # your PATH. Source stays private; only compiled binaries are ever published
 # here.
 set -eu
 
-REPO="nauman/baari-cli-releases"
+REPO="nauman/baari"
 BIN_NAME="baari"
 
 info() { printf 'baari-install: %s\n' "$1"; }
