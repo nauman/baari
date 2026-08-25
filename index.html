@@ -691,6 +691,24 @@ Baari status -- identity: claude
       <pre class="cmd">baari identity set &lt;your-alias&gt;
 baari status</pre>
     </div>
+
+    <div class="install-block">
+      <p class="install-label">Upgrading</p>
+      <pre class="cmd">baari upgrade --check   # am I behind?
+baari upgrade           # do it</pre>
+      <p style="font-size:14px;margin:10px 0 0">
+        <code class="inline">upgrade</code> knows how you installed: it defers to
+        <code class="inline">brew upgrade</code> for a Homebrew install rather than
+        overwriting a managed file, and re-runs the installer otherwise. Re-running
+        the installer by hand works too — it is the same code path, and it tells you
+        which version it moved you from and to.
+      </p>
+      <p style="font-size:14px;margin:10px 0 0;color:var(--np-muted)">
+        This is the only command that uses the network, and only when you run it.
+        <code class="inline">status</code>, <code class="inline">next</code> and
+        <code class="inline">doctor</code> stay offline.
+      </p>
+    </div>
   </section>
 
   <section>
@@ -860,7 +878,7 @@ baari status</pre>
     <h2>What baari is not</h2>
     <ul class="not-list">
       <li>Not a task manager. It reports what your repos already say, and invents no work of its own.</li>
-      <li>Not a service. Everything runs on your machine — no account, no sync, no network call. That one is a commitment, not just a description of v0.1.0.</li>
+      <li>Not a service. Everything runs on your machine — no account, no sync, no telemetry. The single exception is <code class="inline">baari upgrade</code>, which checks for a newer release only when you run it; every other command is offline, and that is a commitment rather than a description of today's build.</li>
       <li>Not a code linter. It reads repo structure and coordination files — never your source.</li>
       <li>Not neutral, and not trying to be. It has opinions about how a repo should be structured, and those opinions came from somewhere specific. The plan is for local config to tune thresholds and exemptions — never to negotiate the opinion itself.</li>
       <li>Not finished. See the two tables above before depending on it for anything.</li>

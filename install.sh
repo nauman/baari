@@ -7,6 +7,14 @@
 # verifies its checksum, and installs the `baari` binary to a directory on
 # your PATH. Source stays private; only compiled binaries are ever published
 # here.
+#
+# THIS IS ALSO THE UPGRADE PATH. Re-running it replaces an existing binary
+# with the latest release and says which version it moved you from and to.
+# `baari upgrade` runs exactly this script, so there is one code path for
+# install and update rather than two that can rot apart.
+#
+# If you installed with Homebrew, use `brew upgrade nauman/tap/baari` instead;
+# this script refuses to overwrite a Homebrew-managed binary.
 set -eu
 
 REPO="nauman/baari"
@@ -93,16 +101,40 @@ main() {
 
   tar -xzf "${work}/${archive}" -C "$work" "$BIN_NAME"
   chmod +x "${work}/${BIN_NAME}"
-  mv "${work}/${BIN_NAME}" "${dest_dir}/${BIN_NAME}"
 
-  info "installed to ${dest_dir}/${BIN_NAME}"
+  # What is already there decides whether this is an install or an upgrade,
+  # and whether it is ours to replace at all.
+  target="${dest_dir}/${BIN_NAME}"
+  previous=""
+  if [ -e "$target" ]; then
+    resolved="$target"
+    if command -v readlink >/dev/null 2>&1; then
+      resolved="$(readlink "$target" 2>/dev/null || printf '%s' "$target")"
+    fi
+    case "$resolved" in
+      */Cellar/*|*/homebrew/*|*/linuxbrew/*)
+        fail "$target is managed by Homebrew — upgrade with: brew upgrade nauman/tap/baari" ;;
+    esac
+    previous="$("$target" version 2>/dev/null | tr -d '\n' || true)"
+  fi
+
+  mv "${work}/${BIN_NAME}" "$target"
+  installed="$("$target" version 2>/dev/null | tr -d '\n' || echo "$BIN_NAME")"
+
+  # Never report "installed" for what was actually a no-op or a downgrade --
+  # a silent success is indistinguishable from a broken update.
+  if [ -z "$previous" ]; then
+    info "installed ${installed} to ${target}"
+  elif [ "$previous" = "$installed" ]; then
+    info "already current: ${installed} (re-installed in place at ${target})"
+  else
+    info "upgraded ${previous} -> ${installed} at ${target}"
+  fi
 
   case ":$PATH:" in
     *":${dest_dir}:"*) ;;
     *) info "note: ${dest_dir} is not on your PATH — add it, e.g. export PATH=\"${dest_dir}:\$PATH\"" ;;
   esac
-
-  "${dest_dir}/${BIN_NAME}" version 2>/dev/null || true
 }
 
 main "$@"
