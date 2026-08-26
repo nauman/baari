@@ -577,11 +577,13 @@ a { color: var(--np-accent-text); }
     <p class="cta-note">macOS and Linux · no account, no network calls</p>
 
     <div class="status-strip">
-      <span class="badge badge-shipped">v0.1.0</span>
+      <span class="badge badge-shipped">v0.3.0</span>
       <p>
-        <strong>Today baari reads and reports — it does not write.</strong> The registry,
-        the cross-repo view, doctor and the roster lint all work. Everything that mutates
-        your repo, watches it, or acts on your behalf is still ahead. The direction is an
+        <strong>baari mostly reads and reports.</strong> The registry, the cross-repo view,
+        doctor, the roster lint, per-checkout test databases and worktree tools all work.
+        It has started to act: a git hook it installs refuses <code class="inline">git stash</code>
+        when that would take uncommitted work. Most of what watches your repo or acts on
+        your behalf is still ahead. The direction is an
         opinionated framework, and the sections below mark honestly what exists and what
         does not.
       </p>
@@ -802,11 +804,17 @@ baari upgrade           # do it</pre>
         <tr><td>doctor</td><td><span class="badge badge-shipped">shipped</span></td></tr>
         <tr><td>thread lint / scaffold</td><td><span class="badge badge-shipped">shipped</span></td></tr>
         <tr><td>thread reads</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>per-checkout test databases</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>worktree list / prune</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>repo adoption checks</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>stash guard (git hook)</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>self-upgrade</td><td><span class="badge badge-shipped">shipped</span></td></tr>
       </tbody>
     </table>
     <p class="table-note">
-      All read-only. Nothing above modifies a repo, and there is no config file, no
-      <code class="inline">--strict</code>, and no daemon in v0.1.0.
+      Nothing above modifies your files. The stash guard is a git hook baari installs into
+      your repo — the repo enforces, baari only reports whether the guard is there. There is
+      still no config file, no <code class="inline">--strict</code>, and no daemon.
     </p>
   </section>
 
@@ -847,6 +855,14 @@ baari upgrade           # do it</pre>
         </tr>
         <tr>
           <td>A watch loop with a stuck-detector</td>
+          <td><span class="badge badge-coming">specified</span></td>
+        </tr>
+        <tr>
+          <td>Test-quality checker distributed by <code class="inline">baari init</code></td>
+          <td><span class="badge badge-coming">specified</span></td>
+        </tr>
+        <tr>
+          <td><code class="inline">baari ci tree</code> — which guard layer is unadopted</td>
           <td><span class="badge badge-coming">specified</span></td>
         </tr>
         <tr>
