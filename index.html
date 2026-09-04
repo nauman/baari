@@ -42,7 +42,7 @@
   } catch (e) { /* private mode / blocked storage — system preference stands */ }
 </script>
 <style>
-/* Nodepad design system — tokens copied from the kuickr `nodepad` system
+/* Nodepad design system — tokens from the Nodepad design system — https://nodepad.tools, published via https://kuickr.co
    (2026-08-16 realignment: Geist, warm paper, amber as punctuation). */
 :root {
   --np-sans: Geist, "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -577,7 +577,7 @@ a { color: var(--np-accent-text); }
     <p class="cta-note">macOS and Linux · no account, no network calls</p>
 
     <div class="status-strip">
-      <span class="badge badge-shipped">v0.3.0</span>
+      <span class="badge badge-shipped">v0.8.0</span>
       <p>
         <strong>baari mostly reads and reports.</strong> The registry, the cross-repo view,
         doctor, the roster lint, per-checkout test databases and worktree tools all work.
@@ -725,9 +725,10 @@ baari upgrade           # do it</pre>
     </p>
     <div class="callout">
       <p>
-        <strong>Not built yet.</strong> There is no config file and no
-        <code class="inline">--strict</code> flag in v0.1.0 — today's commands take flags and
-        read repo structure directly. This is the committed shape for the docs-drift checks
+        <strong>Shipped.</strong> A repo declares its own shape in
+        <code class="inline">.baari.yml</code>, and <code class="inline">--strict</code> turns findings into a
+        failing exit for CI. Earlier releases had neither — this page said so at the time, and both have
+        since landed. The config is read from the repo, never compiled into the binary. This is the shape of the docs-drift checks
         listed as <em>coming</em> below, recorded here so the contract is public before the
         code exists.
       </p>
@@ -786,7 +787,7 @@ baari upgrade           # do it</pre>
         time, and only when one next needs a real change — never as a big-bang rewrite.
         The two worth having first are the ones you would actually feel: generating a docs
         skeleton for a fresh repo, and a doctor that tells you where an existing tree has
-        drifted. Those are the target; neither is in v0.1.0.
+        drifted. Both now ship as <code class="inline">baari docs init</code> and <code class="inline">baari docs doctor</code>.
       </p>
     </div>
   </section>
@@ -809,12 +810,18 @@ baari upgrade           # do it</pre>
         <tr><td>repo adoption checks</td><td><span class="badge badge-shipped">shipped</span></td></tr>
         <tr><td>stash guard (git hook)</td><td><span class="badge badge-shipped">shipped</span></td></tr>
         <tr><td>self-upgrade</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>docs init / doctor</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>explain — the delivery model</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>adr list / check</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>ci tree — per-layer guards</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>auth status / init / sync</td><td><span class="badge badge-shipped">shipped</span></td></tr>
+        <tr><td>repo-local <code class="inline">.baari.yml</code></td><td><span class="badge badge-shipped">shipped</span></td></tr>
       </tbody>
     </table>
     <p class="table-note">
       Nothing above modifies your files. The stash guard is a git hook baari installs into
       your repo — the repo enforces, baari only reports whether the guard is there. There is
-      still no config file, no <code class="inline">--strict</code>, and no daemon.
+      a repo-local config file and a <code class="inline">--strict</code> mode for CI; there is still no daemon.
     </p>
   </section>
 
