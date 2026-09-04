@@ -1,0 +1,1045 @@
+{
+  "schema": "baari-command-ledger/v1",
+  "version": "0.9.0",
+  "commands": [
+    {
+      "path": "baari",
+      "use": "baari",
+      "short": "Cross-repo agent coordination: the ~/.agents registry and thread monitor",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for baari",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "version",
+          "shorthand": "v",
+          "usage": "version for baari",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari adr",
+      "use": "baari adr",
+      "short": "Read and check a repo's ADR register (read-only)",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for adr",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari adr check",
+      "use": "baari adr check [path]",
+      "short": "Report ADR hygiene: shape, status values, register drift (read-only)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for check",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "strict",
+          "usage": "exit non-zero on any finding",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari adr list",
+      "use": "baari adr list [path]",
+      "short": "List every ADR with its status and date",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for list",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari auth",
+      "use": "baari auth",
+      "short": "Check whether this account can reach the private docs library",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for auth",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari auth init",
+      "use": "baari auth init \u003cpath\u003e",
+      "short": "Clone the private docs library to a path you choose",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for init",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "owner/repo to clone (default: private-library in .baari.yml)",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari auth status",
+      "use": "baari auth status",
+      "short": "Report whether this account can read the private library (read-only)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for status",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "owner/repo to check (default: private-library in .baari.yml)",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari auth sync",
+      "use": "baari auth sync",
+      "short": "Update the recorded private-library checkout (fast-forward only)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for sync",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari ci",
+      "use": "baari ci",
+      "short": "Inspect a repo's guard layers",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for ci",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari ci tree",
+      "use": "baari ci tree [path]",
+      "short": "Show which guard layers are present, unwired, or absent",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for tree",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit the stable baari-ci-tree/v1 envelope",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "strict",
+          "usage": "exit non-zero if any layer is not present",
+          "default": "false",
+          "type": "bool"
+        }
+      ],
+      "demo": "demo-repo\n├── profile       present\n├── agent boot    present\n├── skills        present\n└── bin/ci        present"
+    },
+    {
+      "path": "baari completion",
+      "use": "baari completion",
+      "short": "Generate the autocompletion script for the specified shell",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for completion",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari completion bash",
+      "use": "baari completion bash",
+      "short": "Generate the autocompletion script for bash",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for bash",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-descriptions",
+          "usage": "disable completion descriptions",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari completion fish",
+      "use": "baari completion fish",
+      "short": "Generate the autocompletion script for fish",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for fish",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-descriptions",
+          "usage": "disable completion descriptions",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari completion powershell",
+      "use": "baari completion powershell",
+      "short": "Generate the autocompletion script for powershell",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for powershell",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-descriptions",
+          "usage": "disable completion descriptions",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari completion zsh",
+      "use": "baari completion zsh",
+      "short": "Generate the autocompletion script for zsh",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for zsh",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-descriptions",
+          "usage": "disable completion descriptions",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari contract",
+      "use": "baari contract",
+      "short": "Emit the versioned machine-readable command ledger",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for contract",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs",
+      "use": "baari docs",
+      "short": "Scaffold and check a project's docs/ tree",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for docs",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs doctor",
+      "use": "baari docs doctor [path]",
+      "short": "Report where a docs tree has drifted (read-only; --strict for CI)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for doctor",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "strict",
+          "usage": "exit non-zero on any finding",
+          "default": "false",
+          "type": "bool"
+        }
+      ],
+      "demo": "Docs doctor -- demo/docs\n\nOK  index and ownership markers\nOK  ADR register\nOK  sequence registry\n\nNo findings."
+    },
+    {
+      "path": "baari docs init",
+      "use": "baari docs init [path]",
+      "short": "Scaffold the canonical docs/ tree (templates are embedded; works offline)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "force",
+          "usage": "replace files that already exist",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for init",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs sequence",
+      "use": "baari docs sequence",
+      "short": "Define dependency waves and generate delivery-sequence views",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for sequence",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "source",
+          "usage": "sequence/v1 registry",
+          "default": "docs/sequence.yml",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari docs sequence assign",
+      "use": "baari docs sequence assign SPEC",
+      "short": "Assign an existing spec to a dependency wave",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "after",
+          "usage": "spec paths this spec depends on",
+          "default": "[]",
+          "type": "stringSlice"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for assign",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "source",
+          "usage": "sequence/v1 registry",
+          "default": "docs/sequence.yml",
+          "type": "string"
+        },
+        {
+          "name": "to",
+          "usage": "target wave ID (required)",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari docs sequence build",
+      "use": "baari docs sequence build",
+      "short": "Generate Markdown and rich HTML from sequence.yml plus git evidence",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for build",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "output",
+          "usage": "output path without extension",
+          "default": "docs/plans/00-delivery-sequence",
+          "type": "string"
+        },
+        {
+          "name": "program",
+          "usage": "filter to one program with parent and dependency closure",
+          "type": "string"
+        },
+        {
+          "name": "source",
+          "usage": "sequence/v1 registry",
+          "default": "docs/sequence.yml",
+          "type": "string"
+        }
+      ],
+      "demo": "Generated docs/plans/00-delivery-sequence.md and docs/plans/00-delivery-sequence.html from docs/sequence.yml."
+    },
+    {
+      "path": "baari docs sequence wave",
+      "use": "baari docs sequence wave",
+      "short": "Manage global waves and program subwaves",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for wave",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "source",
+          "usage": "sequence/v1 registry",
+          "default": "docs/sequence.yml",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari docs sequence wave define",
+      "use": "baari docs sequence wave define ID",
+      "short": "Define a dependency wave (for example W1 or W1.2)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "after",
+          "usage": "dependency wave IDs",
+          "default": "[]",
+          "type": "stringSlice"
+        },
+        {
+          "name": "exit-gate",
+          "usage": "boundary that unlocks dependent waves",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for define",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "plan",
+          "usage": "owning implementation spec, relative to docs root",
+          "type": "string"
+        },
+        {
+          "name": "program",
+          "usage": "stable program slug for a subwave",
+          "type": "string"
+        },
+        {
+          "name": "source",
+          "usage": "sequence/v1 registry",
+          "default": "docs/sequence.yml",
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "usage": "wave title (required)",
+          "type": "string"
+        },
+        {
+          "name": "under",
+          "usage": "parent global wave",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari doctor",
+      "use": "baari doctor",
+      "short": "Validate machine and repo state: registry, identity, roster markers",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for doctor",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari explain",
+      "use": "baari explain [topic]",
+      "short": "Explain how work moves: workbench, discovery, requirements, architecture, spec, sequence, status",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for explain",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari help",
+      "use": "baari help [command]",
+      "short": "Help about any command",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for help",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari identity",
+      "use": "baari identity",
+      "short": "Configure the identity baari resolves for 'who is me'",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for identity",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari identity set",
+      "use": "baari identity set \u003calias\u003e",
+      "short": "Store the identity alias baari resolves when BAARI_IDENTITY is unset",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for set",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari identity unset",
+      "use": "baari identity unset",
+      "short": "Clear the stored identity alias",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for unset",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari next",
+      "use": "baari next",
+      "short": "Just what you owe a reply to right now, across every registered repo",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for next",
+          "default": "false",
+          "type": "bool"
+        }
+      ],
+      "demo": "OWED BY ME (1)\n- [product-docs/live-conversation] launch-review | awaiting=alex"
+    },
+    {
+      "path": "baari registry",
+      "use": "baari registry",
+      "short": "Inspect and manage the ~/.agents repo registry",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for registry",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari registry forget",
+      "use": "baari registry forget \u003crepo\u003e",
+      "short": "Remove one repo from the registry (ephemeral -- use 'ignore' to make it stick)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for forget",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari registry ignore",
+      "use": "baari registry ignore \u003crepo\u003e",
+      "short": "Permanently exclude a repo from auto-registration (unlike forget, this sticks)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for ignore",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari registry list",
+      "use": "baari registry list",
+      "short": "List every repo registered on this machine",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for list",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari registry prune",
+      "use": "baari registry prune",
+      "short": "Remove registered repos that no longer exist on disk",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for prune",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari registry unignore",
+      "use": "baari registry unignore \u003crepo\u003e",
+      "short": "Allow a previously-ignored repo to be auto-registered again",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for unignore",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari status",
+      "use": "baari status",
+      "short": "Cross-repo OWED BY ME / WAITING ON OTHERS view",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for status",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "print the stable JSON envelope instead of text",
+          "default": "false",
+          "type": "bool"
+        }
+      ],
+      "demo": "Baari status -- identity: alex\n\nOWED BY ME (1)\n- [product-docs/live-conversation] launch-review | awaiting=alex\n\nWAITING ON OTHERS (1)\n- [payments/decision-record] refund-policy | awaiting=maya\n\nNO REPLY OWED (1)\n- [web/decision-record] caching-boundary | awaiting=-"
+    },
+    {
+      "path": "baari testdb",
+      "use": "baari testdb",
+      "short": "Per-checkout test databases: list, provision, prune (ADR 0009)",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for testdb",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari testdb list",
+      "use": "baari testdb list",
+      "short": "Every checkout of this repo, its test database, and whether that database exists",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for list",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "print the stable JSON envelope instead of text",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository to inspect (default: the checkout you are standing in)",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari testdb prepare",
+      "use": "baari testdb prepare",
+      "short": "Create and migrate THIS checkout's own test database",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for prepare",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository to inspect (default: the checkout you are standing in)",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari testdb prune",
+      "use": "baari testdb prune",
+      "short": "Drop test databases whose checkout no longer exists (dry run unless --confirm)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "confirm",
+          "usage": "actually drop the databases listed by the dry run",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for prune",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "print the stable JSON envelope instead of text",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository to inspect (default: the checkout you are standing in)",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari thread",
+      "use": "baari thread",
+      "short": "Inspect and scaffold live agent threads under ~/.agents/threads/",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for thread",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread lint-roster",
+      "use": "baari thread lint-roster",
+      "short": "Flag awaiting: values not on the owning repo's docs/agents/00-roster.md (BAARI-004)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for lint-roster",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread list",
+      "use": "baari thread list [project-slug]",
+      "short": "List live threads for one project, or every registered repo with a scaffolded folder",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for list",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread scaffold",
+      "use": "baari thread scaffold",
+      "short": "Create/refresh this repo's ~/.agents/threads/\u003cproject\u003e/ folder and NOTES.md",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for scaffold",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread show",
+      "use": "baari thread show THREAD",
+      "short": "Read a canonical Markdown thread selectively",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "entries",
+          "usage": "all or last:N",
+          "default": "last:1",
+          "type": "string"
+        },
+        {
+          "name": "format",
+          "usage": "markdown or json",
+          "default": "markdown",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for show",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari upgrade",
+      "use": "baari upgrade",
+      "short": "Update baari to the latest release (the only command that uses the network)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "check",
+          "usage": "report whether a newer release exists; change nothing",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for upgrade",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari version",
+      "use": "baari version",
+      "short": "Print the baari version",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for version",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari whoami",
+      "use": "baari whoami",
+      "short": "Print the identity baari resolves for 'who is me', and where it came from",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for whoami",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari worktree",
+      "use": "baari worktree",
+      "short": "Checkouts of a repository: list, and prune ones nothing would be lost from",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for worktree",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari worktree list",
+      "use": "baari worktree list",
+      "short": "Every checkout, with whether it is clean and already merged",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for list",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "print the stable JSON envelope instead of text",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository to inspect (default: the checkout you are standing in)",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari worktree prune",
+      "use": "baari worktree prune",
+      "short": "Remove checkouts nothing would be lost from (dry run unless --confirm)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "confirm",
+          "usage": "actually remove the checkouts listed by the dry run",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for prune",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "print the stable JSON envelope instead of text",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository to inspect (default: the checkout you are standing in)",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}
