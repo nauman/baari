@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "commands": [
     {
       "path": "baari",
@@ -12,6 +12,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for baari",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         },
@@ -36,6 +42,12 @@
           "usage": "help for adr",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -49,6 +61,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for check",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         },
@@ -72,6 +90,72 @@
           "usage": "help for list",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari adr new",
+      "use": "baari adr new TITLE",
+      "short": "Create the next ADR, optionally superseding an existing one",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for new",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "path",
+          "usage": "repository root",
+          "default": ".",
+          "type": "string"
+        },
+        {
+          "name": "supersedes",
+          "shorthand": "s",
+          "usage": "number of the ADR this replaces",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari adr register",
+      "use": "baari adr register [path]",
+      "short": "Regenerate the ADR register from the records (--check to verify only)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "check",
+          "usage": "verify the register is current; write nothing",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for register",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -87,6 +171,12 @@
           "usage": "help for auth",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -100,6 +190,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for init",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         },
@@ -124,6 +220,12 @@
           "type": "bool"
         },
         {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "repo",
           "usage": "owner/repo to check (default: private-library in .baari.yml)",
           "type": "string"
@@ -142,6 +244,12 @@
           "usage": "help for sync",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -155,6 +263,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for ci",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -180,6 +294,12 @@
           "type": "bool"
         },
         {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "strict",
           "usage": "exit non-zero if any layer is not present",
           "default": "false",
@@ -200,6 +320,12 @@
           "usage": "help for completion",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -213,6 +339,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for bash",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         },
@@ -238,6 +370,12 @@
           "type": "bool"
         },
         {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "no-descriptions",
           "usage": "disable completion descriptions",
           "default": "false",
@@ -255,6 +393,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for powershell",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         },
@@ -280,6 +424,12 @@
           "type": "bool"
         },
         {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "no-descriptions",
           "usage": "disable completion descriptions",
           "default": "false",
@@ -299,8 +449,54 @@
           "usage": "help for contract",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
+    },
+    {
+      "path": "baari dispatch",
+      "use": "baari dispatch THREAD",
+      "short": "Plan or explicitly run one ordered local review attempt",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "approve",
+          "usage": "explicitly execute configured candidates (default is a no-process plan)",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for dispatch",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit the run record as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "timeout",
+          "usage": "maximum duration per candidate attempt",
+          "default": "5m0s",
+          "type": "duration"
+        }
+      ],
+      "demo": "planned agent-a — dry-run; pass --approve to execute (nonce: demo-run)"
     },
     {
       "path": "baari docs",
@@ -312,6 +508,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for docs",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -327,6 +529,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for doctor",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         },
@@ -357,8 +565,47 @@
           "usage": "help for init",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
+    },
+    {
+      "path": "baari docs ledger",
+      "use": "baari docs ledger [path]",
+      "short": "Derive lifecycle, delivery evidence, and badges for every document",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "format",
+          "usage": "output format: json, md, or html",
+          "default": "md",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for ledger",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "output",
+          "usage": "write to a file instead of stdout",
+          "type": "string"
+        }
+      ],
+      "demo": "Documentation ledger -- 3 documents need attention\nactive · unverified   requirements/launch.md\nsuperseded · not-built   backlog/baari/backlog.md → BAARI-009\naccepted · shipped   specs/feature.md"
     },
     {
       "path": "baari docs sequence",
@@ -370,6 +617,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for sequence",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         },
@@ -401,6 +654,12 @@
           "type": "bool"
         },
         {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "source",
           "usage": "sequence/v1 registry",
           "default": "docs/sequence.yml",
@@ -427,6 +686,12 @@
           "type": "bool"
         },
         {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "output",
           "usage": "output path without extension",
           "default": "docs/plans/00-delivery-sequence",
@@ -447,6 +712,33 @@
       "demo": "Generated docs/plans/00-delivery-sequence.md and docs/plans/00-delivery-sequence.html from docs/sequence.yml."
     },
     {
+      "path": "baari docs sequence check",
+      "use": "baari docs sequence check",
+      "short": "Verify every generated projection matches the registry (read-only)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for check",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "source",
+          "usage": "sequence/v1 registry",
+          "default": "docs/sequence.yml",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "path": "baari docs sequence wave",
       "use": "baari docs sequence wave",
       "short": "Manage global waves and program subwaves",
@@ -456,6 +748,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for wave",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         },
@@ -488,6 +786,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for define",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         },
@@ -531,6 +835,12 @@
           "usage": "help for doctor",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -544,6 +854,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for explain",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -561,6 +877,12 @@
           "usage": "help for help",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -574,6 +896,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for identity",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -591,6 +919,12 @@
           "usage": "help for set",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -606,6 +940,12 @@
           "usage": "help for unset",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -619,6 +959,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for next",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -637,6 +983,12 @@
           "usage": "help for registry",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -650,6 +1002,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for forget",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -667,6 +1025,12 @@
           "usage": "help for ignore",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -680,6 +1044,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for list",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -697,6 +1067,12 @@
           "usage": "help for prune",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -712,6 +1088,121 @@
           "usage": "help for unignore",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari serve",
+      "use": "baari serve",
+      "short": "Serve the read-only local operator dashboard",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for serve",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "port",
+          "usage": "loopback port for the local dashboard",
+          "default": "8421",
+          "type": "int"
+        }
+      ],
+      "demo": "Baari operator dashboard: http://127.0.0.1:8421\nRead-only, loopback-only, and live on refresh. Press Ctrl-C to stop."
+    },
+    {
+      "path": "baari setup",
+      "use": "baari setup [repo]",
+      "short": "Configure or revisit Baari's machine paths and repository workflow",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "agents-home",
+          "usage": "absolute machine coordination root",
+          "type": "string"
+        },
+        {
+          "name": "defaults",
+          "usage": "apply safe defaults without questions",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "dev-docs",
+          "usage": "private dev-docs access: none or local",
+          "type": "string"
+        },
+        {
+          "name": "dev-docs-path",
+          "usage": "absolute local private dev-docs checkout",
+          "type": "string"
+        },
+        {
+          "name": "dry-run",
+          "usage": "preview effective choices and destination paths without writes",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for setup",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit the resulting configuration as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "reconfigure",
+          "usage": "reopen the interview using current values as defaults",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "roadmap-projection",
+          "usage": "enable a roadmap provider as a read-only projection",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "sequence-source",
+          "usage": "repository-relative sequence registry",
+          "type": "string"
+        },
+        {
+          "name": "threads",
+          "usage": "thread source: both, machine, or repo",
+          "type": "string"
+        },
+        {
+          "name": "work-source",
+          "usage": "mutable work authority: markdown, jira, linear, or none",
+          "type": "string"
         }
       ]
     },
@@ -733,6 +1224,12 @@
           "usage": "print the stable JSON envelope instead of text",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ],
       "demo": "Baari status -- identity: alex\n\nOWED BY ME (1)\n- [product-docs/live-conversation] launch-review | awaiting=alex\n\nWAITING ON OTHERS (1)\n- [payments/decision-record] refund-policy | awaiting=maya\n\nNO REPLY OWED (1)\n- [web/decision-record] caching-boundary | awaiting=-"
@@ -747,6 +1244,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for testdb",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -772,6 +1275,12 @@
           "type": "bool"
         },
         {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "repo",
           "usage": "repository to inspect (default: the checkout you are standing in)",
           "type": "string"
@@ -788,6 +1297,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for prepare",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         },
@@ -824,6 +1339,12 @@
           "type": "bool"
         },
         {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "repo",
           "usage": "repository to inspect (default: the checkout you are standing in)",
           "type": "string"
@@ -833,13 +1354,50 @@
     {
       "path": "baari thread",
       "use": "baari thread",
-      "short": "Inspect and scaffold live agent threads under ~/.agents/threads/",
+      "short": "Inspect repo decision records and machine-level live conversations",
       "runnable": false,
       "flags": [
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for thread",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread close",
+      "use": "baari thread close THREAD",
+      "short": "Resolve and recoverably archive a thread",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact SHA-256 revision currently on disk",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for close",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "input",
+          "usage": "closed JSON input file, or - for stdin",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -857,19 +1415,196 @@
           "usage": "help for lint-roster",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
     {
       "path": "baari thread list",
       "use": "baari thread list [project-slug]",
-      "short": "List live threads for one project, or every registered repo with a scaffolded folder",
+      "short": "List repo and machine threads together, labeled by source",
       "runnable": true,
       "flags": [
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for list",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread new",
+      "use": "baari thread new [docs-root]",
+      "short": "Create a revisioned thread in repo docs or the machine live layer",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for new",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "input",
+          "usage": "closed JSON input file, or - for stdin",
+          "type": "string"
+        },
+        {
+          "name": "live",
+          "usage": "write to AGENTS_HOME/threads/\u003cproject\u003e instead of repo docs",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread park",
+      "use": "baari thread park THREAD",
+      "short": "Park a live thread and clear reply ownership",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact SHA-256 revision currently on disk",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for park",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "input",
+          "usage": "closed JSON input file, or - for stdin",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread recover",
+      "use": "baari thread recover [docs-root]",
+      "short": "Recover an interrupted close transaction from its durable marker",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "base SHA-256 revision named by the close marker",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for recover",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "live",
+          "usage": "recover a machine-live project transaction",
+          "type": "string"
+        },
+        {
+          "name": "lock-revision",
+          "usage": "original close lock revision named by the marker",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "transaction",
+          "usage": "thread_id named by the close marker",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari thread reply",
+      "use": "baari thread reply THREAD",
+      "short": "Append a reply and transfer or clear ownership",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact SHA-256 revision currently on disk",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for reply",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "input",
+          "usage": "closed JSON input file, or - for stdin",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread resume",
+      "use": "baari thread resume THREAD",
+      "short": "Resume a parked thread with an exact next owner",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact SHA-256 revision currently on disk",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for resume",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "input",
+          "usage": "closed JSON input file, or - for stdin",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -885,6 +1620,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for scaffold",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -914,6 +1655,49 @@
           "usage": "help for show",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread unlock",
+      "use": "baari thread unlock THREAD",
+      "short": "Remove a stale thread lock with revision proof",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact SHA-256 revision currently on disk",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for unlock",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "lock-revision",
+          "usage": "lock owner revision shown by doctor",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "orphan",
+          "usage": "remove a stale lock with no readable owner",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -935,6 +1719,12 @@
           "usage": "help for upgrade",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -948,6 +1738,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for version",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -965,6 +1761,12 @@
           "usage": "help for whoami",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -978,6 +1780,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for worktree",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -999,6 +1807,12 @@
         {
           "name": "json",
           "usage": "print the stable JSON envelope instead of text",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         },
@@ -1031,6 +1845,12 @@
         {
           "name": "json",
           "usage": "print the stable JSON envelope instead of text",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         },
