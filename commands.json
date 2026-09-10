@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "commands": [
     {
       "path": "baari",
@@ -250,6 +250,51 @@
           "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari capabilities",
+      "use": "baari capabilities",
+      "short": "Derive what this tool can do, and what has evidence it landed",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "docs-root",
+          "usage": "docs root holding backlog/ and plans/",
+          "default": "docs",
+          "type": "string"
+        },
+        {
+          "name": "format",
+          "usage": "output format: json or md",
+          "default": "md",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for capabilities",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "path",
+          "usage": "repository root",
+          "default": ".",
+          "type": "string"
+        },
+        {
+          "name": "program",
+          "usage": "backlog program to map",
+          "default": "baari",
+          "type": "string"
         }
       ]
     },
@@ -1213,6 +1258,116 @@
       ]
     },
     {
+      "path": "baari skills",
+      "use": "baari skills",
+      "short": "Install repo-authored skills where agent runtimes find them",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for skills",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari skills install",
+      "use": "baari skills install",
+      "short": "Install skills to a runtime, a repository, or another checkout",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "clean",
+          "usage": "empty the destination first, dropping skills renamed or removed in the source",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "dry-run",
+          "usage": "list what would install and write nothing",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for install",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "link-codex",
+          "usage": "point $CODEX_HOME at the Claude install instead of copying twice",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "mode",
+          "usage": "symlink or copy",
+          "default": "symlink",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "path",
+          "usage": "repository root for --target project",
+          "type": "string"
+        },
+        {
+          "name": "source",
+          "usage": "directory of skill folders",
+          "default": "skills",
+          "type": "string"
+        },
+        {
+          "name": "target",
+          "usage": "claude, codex, agents or project",
+          "default": "claude",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari skills list",
+      "use": "baari skills list",
+      "short": "List the skills this repository authors",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for list",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "source",
+          "usage": "directory of skill folders",
+          "default": "skills",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "path": "baari status",
       "use": "baari status",
       "short": "Cross-repo OWED BY ME / WAITING ON OTHERS view",
@@ -1440,6 +1595,80 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for list",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread migrate",
+      "use": "baari thread migrate",
+      "short": "Migrate recognized legacy v1 threads to agent-thread/v2",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for migrate",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread migrate apply",
+      "use": "baari thread migrate apply",
+      "short": "Execute a plan you have read, stopping at the first conflict",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for apply",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "plan",
+          "usage": "plan file written by `thread migrate plan`, or - for stdin",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari thread migrate plan",
+      "use": "baari thread migrate plan [docs-root]",
+      "short": "Show what migrating would do; writes nothing",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "docs-root",
+          "usage": "docs root to scan",
+          "default": "docs",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for plan",
           "default": "false",
           "type": "bool"
         },
