@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "commands": [
     {
       "path": "baari",
@@ -682,6 +682,12 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for build",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "index",
+          "usage": "also write the generated 00-index companion (overwrites any authored file at that path)",
           "default": "false",
           "type": "bool"
         },
