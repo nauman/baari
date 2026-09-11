@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "commands": [
     {
       "path": "baari",
@@ -1149,6 +1149,72 @@
       ]
     },
     {
+      "path": "baari roster",
+      "use": "baari roster",
+      "short": "Who is declared, who is observed, and what is holding a lock",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for roster",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari roster show",
+      "use": "baari roster show [docs-root]",
+      "short": "Derive who is present from thread replies and held locks",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "docs-root",
+          "usage": "docs root to read",
+          "default": "docs",
+          "type": "string"
+        },
+        {
+          "name": "format",
+          "usage": "text or json",
+          "default": "text",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for show",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "lock-stale-minutes",
+          "usage": "age past which a lock reads as stale regardless of its owner",
+          "default": "0",
+          "type": "int"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "window-hours",
+          "usage": "how recently a reply must land to read as active",
+          "default": "0",
+          "type": "int"
+        }
+      ]
+    },
+    {
       "path": "baari serve",
       "use": "baari serve",
       "short": "Serve the read-only local operator dashboard",
@@ -1561,6 +1627,51 @@
           "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread doctor",
+      "use": "baari thread doctor [docs-root]",
+      "short": "Report every thread under a docs root, including the malformed ones",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "docs-root",
+          "usage": "docs root to scan",
+          "default": "docs",
+          "type": "string"
+        },
+        {
+          "name": "format",
+          "usage": "text or json",
+          "default": "text",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for doctor",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "me",
+          "usage": "identity to treat as mine; repeatable",
+          "default": "[]",
+          "type": "stringArray"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "stale-after",
+          "usage": "flag threads untouched for this many days",
+          "default": "0",
+          "type": "int"
         }
       ]
     },
