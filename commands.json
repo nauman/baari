@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "commands": [
     {
       "path": "baari",
@@ -1676,6 +1676,39 @@
       ]
     },
     {
+      "path": "baari thread history",
+      "use": "baari thread history [docs-root]",
+      "short": "Verify thread history is append-only against a base ref",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "base",
+          "usage": "git ref to compare against",
+          "default": "origin/main",
+          "type": "string"
+        },
+        {
+          "name": "docs-root",
+          "usage": "docs root to check",
+          "default": "docs",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for history",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
       "path": "baari thread lint-roster",
       "use": "baari thread lint-roster",
       "short": "Flag awaiting: values not on the owning repo's docs/agents/00-roster.md (BAARI-004)",
@@ -1745,6 +1778,12 @@
       "runnable": true,
       "flags": [
         {
+          "name": "format",
+          "usage": "text or json (json emits a docs-harness-action-result/v1 envelope)",
+          "default": "text",
+          "type": "string"
+        },
+        {
           "name": "help",
           "shorthand": "h",
           "usage": "help for apply",
@@ -1788,6 +1827,32 @@
           "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread migrate validate",
+      "use": "baari thread migrate validate",
+      "short": "Check every proposal in a plan without touching a file",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for validate",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "plan",
+          "usage": "plan file, or - for stdin",
+          "type": "string"
         }
       ]
     },
@@ -1999,6 +2064,27 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for show",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread surface",
+      "use": "baari thread surface",
+      "short": "Emit the direct input surface of the lifecycle commands",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for surface",
           "default": "false",
           "type": "bool"
         },
