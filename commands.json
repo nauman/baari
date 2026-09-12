@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "commands": [
     {
       "path": "baari",
@@ -1109,7 +1109,7 @@
     {
       "path": "baari registry prune",
       "use": "baari registry prune",
-      "short": "Remove registered repos that no longer exist on disk",
+      "short": "Remove registered repos that are no longer registered repositories",
       "runnable": true,
       "flags": [
         {
@@ -2176,6 +2176,39 @@
         {
           "name": "no-color",
           "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari watch",
+      "use": "baari watch",
+      "short": "Report thread transitions as they happen, across every registered repo",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for watch",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "interval",
+          "usage": "fixed seconds between scans, disabling the backoff",
+          "default": "0",
+          "type": "int"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "once",
+          "usage": "scan a single time and exit; the baseline scan, for scripting",
           "default": "false",
           "type": "bool"
         }
