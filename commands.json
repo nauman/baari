@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "commands": [
     {
       "path": "baari",
@@ -1915,6 +1915,53 @@
           "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari thread promote",
+      "use": "baari thread promote \u003clive-thread\u003e",
+      "short": "Record a machine-local decision in the repository thread",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "because",
+          "usage": "why; repeatable",
+          "default": "[]",
+          "type": "stringArray"
+        },
+        {
+          "name": "decision",
+          "usage": "what was settled, in one line",
+          "type": "string"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact SHA-256 of the repository thread",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for promote",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "owner",
+          "usage": "identity accountable for the decision",
+          "type": "string"
+        },
+        {
+          "name": "to",
+          "usage": "repository thread that will carry the decision",
+          "type": "string"
         }
       ]
     },
