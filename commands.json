@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "commands": [
     {
       "path": "baari",
@@ -259,6 +259,11 @@
       "short": "Derive what this tool can do, and what has evidence it landed",
       "runnable": true,
       "flags": [
+        {
+          "name": "check",
+          "usage": "compare a committed map against a fresh render and fail if it is stale",
+          "type": "string"
+        },
         {
           "name": "docs-root",
           "usage": "docs root holding backlog/ and plans/",
