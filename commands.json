@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.17.1",
+  "version": "0.18.0",
   "commands": [
     {
       "path": "baari",
@@ -272,8 +272,8 @@
         },
         {
           "name": "format",
-          "usage": "output format: json or md",
-          "default": "md",
+          "usage": "output format: terminal, md, html or json",
+          "default": "terminal",
           "type": "string"
         },
         {
@@ -570,6 +570,54 @@
       ]
     },
     {
+      "path": "baari docs architecture",
+      "use": "baari docs architecture",
+      "short": "Check the architecture tree of a repository",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for architecture",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs architecture check",
+      "use": "baari docs architecture check [path]",
+      "short": "Report architecture documents that name a target which does not exist",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for check",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "Emit the report as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
       "path": "baari docs doctor",
       "use": "baari docs doctor [path]",
       "short": "Report where a docs tree has drifted (read-only; --strict for CI)",
@@ -656,6 +704,82 @@
         }
       ],
       "demo": "Documentation ledger -- 3 documents need attention\nactive · unverified   requirements/launch.md\nsuperseded · not-built   backlog/baari/backlog.md → BAARI-009\naccepted · shipped   specs/feature.md"
+    },
+    {
+      "path": "baari docs publish",
+      "use": "baari docs publish",
+      "short": "Compare the published projection against its sources",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for publish",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs publish check",
+      "use": "baari docs publish check [path]",
+      "short": "Report published pages that drifted, lost their source, or were never published",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for check",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "ignore-file",
+          "usage": "Upload-exclusion declarations to honour when listing unclaimed sources",
+          "default": ".kuickrignore",
+          "type": "string"
+        },
+        {
+          "name": "json",
+          "usage": "Emit the report as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "Publish record to compare against (default: docs-publish-manifest in .baari.yml)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "server-digests",
+          "usage": "JSON map of published path to the digest the server serves; makes the server the evidence instead of the record",
+          "type": "string"
+        },
+        {
+          "name": "strict",
+          "usage": "Exit non-zero when any published page is stale",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "unclaimed",
+          "usage": "Also list local sources this record has never claimed (not defects)",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
     },
     {
       "path": "baari docs sequence",
@@ -880,6 +1004,54 @@
       ]
     },
     {
+      "path": "baari docs taxonomy",
+      "use": "baari docs taxonomy [path]",
+      "short": "Print the docs taxonomy, or check it against docs-required-dirs",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "check",
+          "usage": "Compare against this repository's docs-required-dirs and fail on disagreement",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for taxonomy",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs tree",
+      "use": "baari docs tree [path]",
+      "short": "Show the canonical docs shape beside what is on disk",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for tree",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
       "path": "baari doctor",
       "use": "baari doctor",
       "short": "Validate machine and repo state: registry, identity, roster markers",
@@ -903,7 +1075,7 @@
     {
       "path": "baari explain",
       "use": "baari explain [topic]",
-      "short": "Explain how work moves: workbench, discovery, requirements, architecture, spec, sequence, status",
+      "short": "Explain how work moves: workbench, architecture, design, adr, plans, code-learnings, infra, discovery, requirements, sequence, status",
       "runnable": true,
       "flags": [
         {
