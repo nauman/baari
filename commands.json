@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "commands": [
     {
       "path": "baari",
@@ -154,6 +154,45 @@
         {
           "name": "no-color",
           "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari adr shape",
+      "use": "baari adr shape [path]",
+      "short": "Report ADRs that carry procedure instead of a decision",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "dir",
+          "usage": "ADR directory, relative to the repository root",
+          "default": "docs/adr",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for shape",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "Emit the report as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "strict",
+          "usage": "Exit non-zero when a record is missing a core section or is over length while proposed",
           "default": "false",
           "type": "bool"
         }
