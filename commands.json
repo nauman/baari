@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "commands": [
     {
       "path": "baari",
@@ -339,6 +339,12 @@
           "usage": "backlog program to map",
           "default": "baari",
           "type": "string"
+        },
+        {
+          "name": "write",
+          "usage": "regenerate both committed Baari capability projections from their sources",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -352,6 +358,27 @@
           "name": "help",
           "shorthand": "h",
           "usage": "help for ci",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari ci run",
+      "use": "baari ci run [repo]",
+      "short": "Run the repository's local CI gate",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for run",
           "default": "false",
           "type": "bool"
         },
@@ -521,6 +548,38 @@
         {
           "name": "no-descriptions",
           "usage": "disable completion descriptions",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari configure",
+      "use": "baari configure [repo]",
+      "short": "Set shared branch policy in .repo-profile.yml",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "branch-level",
+          "usage": "always-branch, docs-exempt, or warn (aliases: 1, 2, 3)",
+          "type": "string"
+        },
+        {
+          "name": "dry-run",
+          "usage": "preview without writing the profile",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for configure",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
         }
@@ -747,7 +806,7 @@
     {
       "path": "baari docs publish",
       "use": "baari docs publish",
-      "short": "Compare the published projection against its sources",
+      "short": "Check or sync a repo's published docs projection",
       "runnable": false,
       "flags": [
         {
@@ -817,6 +876,38 @@
           "usage": "Also list local sources this record has never claimed (not defects)",
           "default": "false",
           "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs publish sync",
+      "use": "baari docs publish sync [repo]",
+      "short": "Publish selected changed pages through the repo's adapter",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "dry-run",
+          "usage": "show selected pages without publishing",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for sync",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "only",
+          "usage": "comma-separated repository paths to publish",
+          "type": "string"
         }
       ]
     },
@@ -1156,7 +1247,7 @@
     {
       "path": "baari identity",
       "use": "baari identity",
-      "short": "Configure the identity baari resolves for 'who is me'",
+      "short": "Manage the aliases you own and choose the active actor",
       "runnable": false,
       "flags": [
         {
@@ -1175,9 +1266,72 @@
       ]
     },
     {
+      "path": "baari identity add",
+      "use": "baari identity add \u003calias\u003e",
+      "short": "Add an alias you own without replacing your current aliases",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for add",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari identity list",
+      "use": "baari identity list",
+      "short": "List every alias you own and the configured defaults",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for list",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari identity remove",
+      "use": "baari identity remove \u003calias\u003e",
+      "short": "Remove an owned alias and its repository selections",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for remove",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
       "path": "baari identity set",
       "use": "baari identity set \u003calias\u003e",
-      "short": "Store the identity alias baari resolves when BAARI_IDENTITY is unset",
+      "short": "Compatibility spelling for baari identity use",
       "runnable": true,
       "flags": [
         {
@@ -1198,7 +1352,7 @@
     {
       "path": "baari identity unset",
       "use": "baari identity unset",
-      "short": "Clear the stored identity alias",
+      "short": "Clear every locally owned identity alias",
       "runnable": true,
       "flags": [
         {
@@ -1213,6 +1367,32 @@
           "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari identity use",
+      "use": "baari identity use \u003calias\u003e",
+      "short": "Choose an owned alias as the machine or repository default",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for use",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "select this alias for the repository containing PATH",
+          "type": "string"
         }
       ]
     },
@@ -1237,6 +1417,69 @@
         }
       ],
       "demo": "OWED BY ME (1)\n- [product-docs/live-conversation] launch-review | awaiting=alex"
+    },
+    {
+      "path": "baari rails",
+      "use": "baari rails",
+      "short": "Rails-specific local CI practices",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for rails",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari rails ci",
+      "use": "baari rails ci [repo]",
+      "short": "Run a Rails app's local CI gate",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for ci",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari rails doctor",
+      "use": "baari rails doctor [repo]",
+      "short": "Check the Rails local CI entry points",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for doctor",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
     },
     {
       "path": "baari registry",
@@ -1361,6 +1604,33 @@
           "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari release",
+      "use": "baari release \u003ctag\u003e",
+      "short": "Run the repository's local Baari release gate and publish a version",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for release",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository root containing tools/baari/bin/release",
+          "default": ".",
+          "type": "string"
         }
       ]
     },
@@ -1497,6 +1767,11 @@
           "usage": "help for setup",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "identity",
+          "usage": "owned alias to add and select for this repository",
+          "type": "string"
         },
         {
           "name": "json",
@@ -1650,6 +1925,27 @@
       ]
     },
     {
+      "path": "baari skills route",
+      "use": "baari skills route [repo]",
+      "short": "Report which dev-docs skills fit a repository",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for route",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
       "path": "baari status",
       "use": "baari status",
       "short": "Cross-repo OWED BY ME / WAITING ON OTHERS view",
@@ -1676,6 +1972,27 @@
         }
       ],
       "demo": "Baari status -- identity: alex\n\nOWED BY ME (1)\n- [product-docs/live-conversation] launch-review | awaiting=alex\n\nWAITING ON OTHERS (1)\n- [payments/decision-record] refund-policy | awaiting=maya\n\nNO REPLY OWED (1)\n- [web/decision-record] caching-boundary | awaiting=-"
+    },
+    {
+      "path": "baari task",
+      "use": "baari task [name] [args...]",
+      "short": "Run a repository-declared operational task",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for task",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
     },
     {
       "path": "baari testdb",
@@ -1818,7 +2135,7 @@
     {
       "path": "baari thread close",
       "use": "baari thread close THREAD",
-      "short": "Resolve and recoverably archive a thread",
+      "short": "Archive after promotion or an explicit no-decision reason",
       "runnable": true,
       "flags": [
         {
@@ -2106,7 +2423,7 @@
     {
       "path": "baari thread park",
       "use": "baari thread park THREAD",
-      "short": "Park a live thread and clear reply ownership",
+      "short": "Park after promotion or an explicit no-decision reason",
       "runnable": true,
       "flags": [
         {
@@ -2137,7 +2454,7 @@
     {
       "path": "baari thread promote",
       "use": "baari thread promote \u003clive-thread\u003e",
-      "short": "Record a machine-local decision in the repository thread",
+      "short": "Append a readable decision summary to the repository record",
       "runnable": true,
       "flags": [
         {
@@ -2480,7 +2797,7 @@
     {
       "path": "baari whoami",
       "use": "baari whoami",
-      "short": "Print the identity baari resolves for 'who is me', and where it came from",
+      "short": "Print the active actor and every alias you own",
       "runnable": true,
       "flags": [
         {
