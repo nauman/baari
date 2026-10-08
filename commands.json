@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.21.0",
+  "version": "0.22.1",
   "commands": [
     {
       "path": "baari",
@@ -293,6 +293,195 @@
       ]
     },
     {
+      "path": "baari brainstorm",
+      "use": "baari brainstorm",
+      "short": "Local visual brainstorming companion",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for brainstorm",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari brainstorm asset",
+      "use": "baari brainstorm asset \u003cframe|helper\u003e",
+      "short": "Read a bundled visual companion reference asset",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for asset",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari brainstorm serve",
+      "use": "baari brainstorm serve",
+      "short": "Start an isolated visual companion session",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "dir",
+          "usage": "Existing session directory",
+          "type": "string"
+        },
+        {
+          "name": "ephemeral",
+          "usage": "Internal ephemeral session marker",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for serve",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "host",
+          "usage": "Interface to bind",
+          "default": "127.0.0.1",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "owner-pid",
+          "usage": "Stop if this explicit owner process exits",
+          "default": "0",
+          "type": "int"
+        },
+        {
+          "name": "port",
+          "usage": "Listening port; zero selects an available port",
+          "default": "0",
+          "type": "int"
+        },
+        {
+          "name": "project-dir",
+          "usage": "Persist session under this project's .superpowers/brainstorm directory",
+          "type": "string"
+        },
+        {
+          "name": "token",
+          "usage": "Internal session shutdown identity",
+          "type": "string"
+        },
+        {
+          "name": "url-host",
+          "usage": "Display hostname",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari brainstorm start",
+      "use": "baari brainstorm start",
+      "short": "Start an isolated visual companion session",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "background",
+          "usage": "Force detached mode",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "foreground",
+          "usage": "Serve in the current terminal",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for start",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "host",
+          "usage": "Interface to bind",
+          "default": "127.0.0.1",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "owner-pid",
+          "usage": "Stop if this explicit owner process exits",
+          "default": "0",
+          "type": "int"
+        },
+        {
+          "name": "port",
+          "usage": "Listening port; zero selects an available port",
+          "default": "0",
+          "type": "int"
+        },
+        {
+          "name": "project-dir",
+          "usage": "Persist session under this project's .superpowers/brainstorm directory",
+          "type": "string"
+        },
+        {
+          "name": "url-host",
+          "usage": "Display hostname",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari brainstorm stop",
+      "use": "baari brainstorm stop \u003csession-directory\u003e",
+      "short": "Stop only the server matching this session's identity",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for stop",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
       "path": "baari capabilities",
       "use": "baari capabilities",
       "short": "Derive what this tool can do, and what has evidence it landed",
@@ -307,6 +496,12 @@
           "name": "docs-root",
           "usage": "docs root holding backlog/ and plans/",
           "default": "docs",
+          "type": "string"
+        },
+        {
+          "name": "docs-view",
+          "usage": "HTML folder inventory: index (staged/tracked paths) or live (working tree)",
+          "default": "index",
           "type": "string"
         },
         {
@@ -370,11 +565,331 @@
       ]
     },
     {
+      "path": "baari ci audit",
+      "use": "baari ci audit",
+      "short": "Audit repository content using external policy",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for audit",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari ci audit config-keys",
+      "use": "baari ci audit config-keys [repo]",
+      "short": "Run the config-keys repository audit",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for config-keys",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "policy",
+          "usage": "repository-relative JSON audit policy",
+          "type": "string"
+        },
+        {
+          "name": "strict",
+          "usage": "fail on exact findings",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari ci audit html",
+      "use": "baari ci audit html [targets...]",
+      "short": "Run the html repository audit",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for html",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "policy",
+          "usage": "repository-relative JSON audit policy",
+          "type": "string"
+        },
+        {
+          "name": "strict",
+          "usage": "fail on exact findings",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "targets",
+          "usage": "comma-separated HTML targets",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari ci audit library",
+      "use": "baari ci audit library [repo]",
+      "short": "Run the library repository audit",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for library",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "policy",
+          "usage": "repository-relative JSON audit policy",
+          "type": "string"
+        },
+        {
+          "name": "strict",
+          "usage": "fail on exact findings",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari ci audit operations",
+      "use": "baari ci audit operations [repo]",
+      "short": "Run the operations repository audit",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "check",
+          "usage": "validate live callers and compare ledger without writing",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for operations",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "output",
+          "usage": "repository-relative generated ledger",
+          "type": "string"
+        },
+        {
+          "name": "policy",
+          "usage": "repository-relative JSON audit policy",
+          "type": "string"
+        },
+        {
+          "name": "registry",
+          "usage": "repository-relative operation registry JSON",
+          "type": "string"
+        },
+        {
+          "name": "strict",
+          "usage": "fail on exact findings",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari ci audit public-binary",
+      "use": "baari ci audit public-binary [repo]",
+      "short": "Run the public-binary repository audit",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "binary",
+          "usage": "exact binary artifact to inspect",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for public-binary",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "policy",
+          "usage": "repository-relative JSON audit policy",
+          "type": "string"
+        },
+        {
+          "name": "strict",
+          "usage": "fail on exact findings",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari ci audit public-source",
+      "use": "baari ci audit public-source [repo]",
+      "short": "Run the public-source repository audit",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for public-source",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "policy",
+          "usage": "repository-relative JSON audit policy",
+          "type": "string"
+        },
+        {
+          "name": "strict",
+          "usage": "fail on exact findings",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari ci audit twins",
+      "use": "baari ci audit twins [repo]",
+      "short": "Run the twins repository audit",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "adopt",
+          "usage": "explicitly record the current twin count",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "baseline",
+          "usage": "repository-relative baseline JSON",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for twins",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "policy",
+          "usage": "repository-relative JSON audit policy",
+          "type": "string"
+        },
+        {
+          "name": "strict",
+          "usage": "fail on exact findings",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari ci contract",
+      "use": "baari ci contract [repo]",
+      "short": "Check config, tasks, boot examples and declared guard wiring",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "binary",
+          "usage": "probe this installed/released binary instead of the running command ledger",
+          "type": "string"
+        },
+        {
+          "name": "guidance",
+          "usage": "additional repo-relative Markdown files with executable shell examples",
+          "default": "[]",
+          "type": "stringSlice"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for contract",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
       "path": "baari ci run",
       "use": "baari ci run [repo]",
       "short": "Run the repository's local CI gate",
       "runnable": true,
       "flags": [
+        {
+          "name": "fast",
+          "usage": "run the declared fast subset of a native gate",
+          "default": "false",
+          "type": "bool"
+        },
         {
           "name": "help",
           "shorthand": "h",
@@ -607,6 +1122,65 @@
       ]
     },
     {
+      "path": "baari debug",
+      "use": "baari debug",
+      "short": "Native investigation utilities",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for debug",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari debug polluter",
+      "use": "baari debug polluter \u003cunwanted-path\u003e \u003ctest\u003e [test...]",
+      "short": "Identify which selected test creates unwanted state",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "command",
+          "usage": "JSON argv array containing {test}; no shell expansion",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for polluter",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "Emit investigation results as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "Repository whose tests are selected",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "path": "baari dispatch",
       "use": "baari dispatch THREAD",
       "short": "Plan or explicitly run one ordered local review attempt",
@@ -744,6 +1318,115 @@
       "demo": "Docs doctor -- demo/docs\n\nOK  index and ownership markers\nOK  ADR register\nOK  sequence registry\n\nNo findings."
     },
     {
+      "path": "baari docs evidence",
+      "use": "baari docs evidence [repo]",
+      "short": "Compare delivery claims with reachable Git trailers and release containment",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "backlog",
+          "usage": "repository-relative legacy inventory",
+          "default": "docs/backlog",
+          "type": "string"
+        },
+        {
+          "name": "feature",
+          "usage": "select one backlog feature",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for evidence",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "plans",
+          "usage": "repository-relative plan directory",
+          "default": "docs/plans",
+          "type": "string"
+        },
+        {
+          "name": "ref",
+          "usage": "Git ref whose reachable delivery is inspected",
+          "default": "HEAD",
+          "type": "string"
+        },
+        {
+          "name": "strict",
+          "usage": "fail on delivery disagreement",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs html",
+      "use": "baari docs html",
+      "short": "Maintain generated HTML behavior from owned source assets",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for html",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs html scroll-sync",
+      "use": "baari docs html scroll-sync \u003cpath\u003e [path...]",
+      "short": "Sync the selected scroll shim into HTML projections",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "check",
+          "usage": "read-only freshness check",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for scroll-sync",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit the result as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "shim",
+          "usage": "canonical JavaScript source path",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "path": "baari docs init",
       "use": "baari docs init [path]",
       "short": "Scaffold the canonical docs/ tree (templates are embedded; works offline)",
@@ -752,6 +1435,12 @@
         {
           "name": "force",
           "usage": "replace files that already exist",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "headless",
+          "usage": "record a headless project without a UI design system",
           "default": "false",
           "type": "bool"
         },
@@ -767,6 +1456,78 @@
           "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "numbered",
+          "usage": "use taxonomy ordering for new folders; preserve existing homes",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs learnings",
+      "use": "baari docs learnings",
+      "short": "Generate indexes from learning source fields",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for learnings",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs learnings index",
+      "use": "baari docs learnings index",
+      "short": "Generate or check the Hook-based learning index",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "check",
+          "usage": "read-only freshness check",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "directory",
+          "usage": "repository-relative learnings directory",
+          "default": "docs/code_learnings",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for index",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit the result as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository to operate on",
+          "default": ".",
+          "type": "string"
         }
       ]
     },
@@ -802,6 +1563,88 @@
         }
       ],
       "demo": "Documentation ledger -- 3 documents need attention\nactive · unverified   requirements/launch.md\nsuperseded · not-built   backlog/baari/backlog.md → BAARI-009\naccepted · shipped   specs/feature.md"
+    },
+    {
+      "path": "baari docs plan",
+      "use": "baari docs plan",
+      "short": "Create a lean plan contract from an owned template",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for plan",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs plan new",
+      "use": "baari docs plan new \u003cid\u003e \u003cslug\u003e \u003ctitle\u003e",
+      "short": "Create one Markdown plan and optional generated HTML",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "directory",
+          "usage": "repository-relative plans directory",
+          "default": "docs/plans",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for new",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "html",
+          "usage": "also create an escaped HTML projection of the Markdown source",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit created paths as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository to operate on",
+          "default": ".",
+          "type": "string"
+        },
+        {
+          "name": "templates",
+          "usage": "template input directory (required for a variation)",
+          "type": "string"
+        },
+        {
+          "name": "variation",
+          "usage": "optional legacy Markdown template name",
+          "type": "string"
+        },
+        {
+          "name": "work",
+          "usage": "reference to the owning work item",
+          "default": "\u003cOWNING_WORK_REFERENCE\u003e",
+          "type": "string"
+        }
+      ]
     },
     {
       "path": "baari docs publish",
@@ -880,21 +1723,96 @@
       ]
     },
     {
+      "path": "baari docs publish recover",
+      "use": "baari docs publish recover [repo]",
+      "short": "Inspect or reconcile an uncertain publication without retrying a remote write",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-journal",
+          "usage": "exact SHA-256 journal revision from inspection",
+          "type": "string"
+        },
+        {
+          "name": "expect-manifest",
+          "usage": "exact SHA-256 manifest revision from inspection",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for recover",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "observed-absent",
+          "usage": "explicitly observed remote destination is absent",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "observed-digest",
+          "usage": "SHA-256 content digest explicitly observed at the remote destination",
+          "type": "string"
+        },
+        {
+          "name": "policy",
+          "usage": "repository-owned publisher JSON policy",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "path": "baari docs publish sync",
       "use": "baari docs publish sync [repo]",
-      "short": "Publish selected changed pages through the repo's adapter",
+      "short": "Publish explicit selected pages and record successful operations",
       "runnable": true,
       "flags": [
         {
           "name": "dry-run",
-          "usage": "show selected pages without publishing",
+          "usage": "Show selection without network or recording",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "from-file",
+          "usage": "File containing selected paths, one per line or comma-separated",
+          "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for sync",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "ignore-file",
+          "usage": "Repository-owned upload exclusions for unclaimed selection",
+          "type": "string"
+        },
+        {
+          "name": "json",
+          "usage": "Emit operation results as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "limit",
+          "usage": "Maximum selected pages; zero means no limit",
+          "default": "0",
+          "type": "int"
+        },
+        {
+          "name": "list",
+          "usage": "List selected paths without publishing",
           "default": "false",
           "type": "bool"
         },
@@ -906,7 +1824,109 @@
         },
         {
           "name": "only",
-          "usage": "comma-separated repository paths to publish",
+          "usage": "Comma-separated repository paths",
+          "type": "string"
+        },
+        {
+          "name": "policy",
+          "usage": "Repository-owned publisher JSON policy",
+          "type": "string"
+        },
+        {
+          "name": "prefix",
+          "usage": "Narrow selection at a repository path boundary",
+          "type": "string"
+        },
+        {
+          "name": "retract",
+          "usage": "Select only gone pages for retraction",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "served-digests",
+          "usage": "Existing served-digest JSON evidence for unlanded selection",
+          "type": "string"
+        },
+        {
+          "name": "server-digests",
+          "usage": "Collect served digests through the configured clone argv",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "server-digests-out",
+          "usage": "Repository-relative served digest output override",
+          "type": "string"
+        },
+        {
+          "name": "state",
+          "usage": "Selected state: drifted, unclaimed, or unlanded",
+          "default": "drifted",
+          "type": "string"
+        },
+        {
+          "name": "yes",
+          "usage": "Confirm selected gone-page retractions",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs repair",
+      "use": "baari docs repair [repo]",
+      "short": "Preview safe mechanical doc repairs; apply only an exact approved preview",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "apply",
+          "usage": "apply only mechanical changes shown by the approved preview",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact plan SHA-256 from the preview",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for repair",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari docs retirement",
+      "use": "baari docs retirement [repo]",
+      "short": "Check explicit retirement dispositions and replacement commands",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for retirement",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "register",
+          "usage": "repository-relative disposition JSON",
           "type": "string"
         }
       ]
@@ -1024,13 +2044,19 @@
     {
       "path": "baari docs sequence check",
       "use": "baari docs sequence check",
-      "short": "Verify every generated projection matches the registry (read-only)",
+      "short": "Verify delivery projections; opt in to generated navigation checks with --index",
       "runnable": true,
       "flags": [
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for check",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "index",
+          "usage": "also check explicitly generated navigation indexes; authored navigation remains outside this projection",
           "default": "false",
           "type": "bool"
         },
@@ -1245,6 +2271,105 @@
       ]
     },
     {
+      "path": "baari hooks",
+      "use": "baari hooks",
+      "short": "Install native hook delegates and validate their events",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for hooks",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari hooks install",
+      "use": "baari hooks install",
+      "short": "Install delegates without overwriting existing hook owners",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "binary",
+          "usage": "binary path used by installed delegates",
+          "default": "baari",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for install",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit installed paths as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository receiving hooks",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari hooks run",
+      "use": "baari hooks run \u003chook\u003e [hook-argument]",
+      "short": "Run a native hook event (Git delegate entry point)",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "backlog-root",
+          "usage": "repository-relative backlog root",
+          "default": "docs/backlog",
+          "type": "string"
+        },
+        {
+          "name": "docs-root",
+          "usage": "repository-relative documentation root",
+          "default": "docs",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for run",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository being checked",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "path": "baari identity",
       "use": "baari identity",
       "short": "Manage the aliases you own and choose the active actor",
@@ -1392,6 +2517,180 @@
         {
           "name": "repo",
           "usage": "select this alias for the repository containing PATH",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari loop",
+      "use": "baari loop",
+      "short": "Run bounded agent work from repository policy",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for loop",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari loop check",
+      "use": "baari loop check",
+      "short": "Check declared required files without running an agent",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for check",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "plan",
+          "usage": "repository-relative loop JSON (or loop-plan config)",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository owning the loop policy",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari loop prompt",
+      "use": "baari loop prompt",
+      "short": "Read the declared prompt source without creating work",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for prompt",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "plan",
+          "usage": "repository-relative loop JSON (or loop-plan config)",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository owning the loop policy",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari loop run",
+      "use": "baari loop run",
+      "short": "Run bounded external-agent iterations and checks",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "agent",
+          "usage": "external agent name",
+          "default": "claude",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for run",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "iterations",
+          "usage": "override the iteration limit",
+          "default": "1",
+          "type": "int"
+        },
+        {
+          "name": "json",
+          "usage": "emit the final loop result as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "max-failures",
+          "usage": "override consecutive failure limit",
+          "default": "3",
+          "type": "int"
+        },
+        {
+          "name": "mode",
+          "usage": "minimal or full bounded mode",
+          "default": "full",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-stop-on-clean",
+          "usage": "continue despite unchanged Git content",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "plan",
+          "usage": "repository-relative loop JSON (or loop-plan config)",
+          "type": "string"
+        },
+        {
+          "name": "prd",
+          "usage": "existing external Ralph input; not a new repository backlog",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository owning the loop policy",
+          "default": ".",
+          "type": "string"
+        },
+        {
+          "name": "sleep",
+          "usage": "override delay between iterations in seconds",
+          "default": "0",
+          "type": "int"
+        },
+        {
+          "name": "stop-file",
+          "usage": "external stop file",
+          "type": "string"
+        },
+        {
+          "name": "work-plan",
+          "usage": "repository-relative native baari-plan/v1; requires configured work-manifest",
           "type": "string"
         }
       ]
@@ -1610,9 +2909,15 @@
     {
       "path": "baari release",
       "use": "baari release \u003ctag\u003e",
-      "short": "Run the repository's local Baari release gate and publish a version",
+      "short": "Run the full native release gate and publish a version",
       "runnable": true,
       "flags": [
+        {
+          "name": "existing-tag",
+          "usage": "publish an existing tag only when it points to exact HEAD; still run every gate",
+          "default": "false",
+          "type": "bool"
+        },
         {
           "name": "help",
           "shorthand": "h",
@@ -1627,10 +2932,267 @@
           "type": "bool"
         },
         {
+          "name": "plan",
+          "usage": "repository-relative release JSON (or release-plan config)",
+          "type": "string"
+        },
+        {
+          "name": "publication-observed",
+          "usage": "resume ledger/tag completion only after observing an existing published release; never republish",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "repo",
-          "usage": "repository root containing tools/baari/bin/release",
+          "usage": "repository whose full gate and release policy apply",
           "default": ".",
           "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari release reconcile",
+      "use": "baari release reconcile \u003ctag\u003e",
+      "short": "Observe exact local and remote release identities without publishing",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for reconcile",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "plan",
+          "usage": "repository-owned release policy",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "release repository",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari release-notes",
+      "use": "baari release-notes",
+      "short": "Prepare reviewable release candidates and provisional evidence",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for release-notes",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari release-notes build",
+      "use": "baari release-notes build \u003cproject-root\u003e",
+      "short": "Build deterministic candidate HTML",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for build",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari release-notes check",
+      "use": "baari release-notes check \u003cproject-root\u003e",
+      "short": "Validate candidate records and generated bytes without writing",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for check",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "release-id",
+          "usage": "check this release candidate",
+          "type": "string"
+        },
+        {
+          "name": "require-status",
+          "usage": "require draft, pushed, or deployed",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari release-notes init",
+      "use": "baari release-notes init \u003cproject-root\u003e",
+      "short": "Initialize candidate release records without replacing authored data",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for init",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari release-notes new",
+      "use": "baari release-notes new \u003cproject-root\u003e \u003crelease-id\u003e",
+      "short": "Create a draft candidate for a committed application source",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for new",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari release-notes promote",
+      "use": "baari release-notes promote \u003cproject-root\u003e \u003crelease-id\u003e",
+      "short": "Advance a candidate with current provisional evidence",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for promote",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "ship-url",
+          "usage": "configured proposed public URL for pushed candidate",
+          "type": "string"
+        },
+        {
+          "name": "to",
+          "usage": "advance to pushed or deployed candidate",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari release-notes recover",
+      "use": "baari release-notes recover \u003cproject-root\u003e",
+      "short": "Recover an interrupted release transaction without guessing ownership",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for recover",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari release-notes verify-deploy",
+      "use": "baari release-notes verify-deploy \u003cproject-root\u003e \u003crelease-id\u003e",
+      "short": "Observe a deployment through an authorized pinned external adapter",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for verify-deploy",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "version",
+          "usage": "expected immutable git:\u003csha\u003e or oci:sha256:\u003cdigest\u003e",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari release-notes verify-source",
+      "use": "baari release-notes verify-source \u003cproject-root\u003e \u003crelease-id\u003e",
+      "short": "Observe fresh protected-ref ancestry and configured source checks",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for verify-source",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
@@ -1808,6 +3370,11 @@
           "type": "string"
         },
         {
+          "name": "work-manifest",
+          "usage": "declare a repository-relative native Work manifest; no migration or provider writes",
+          "type": "string"
+        },
+        {
           "name": "work-source",
           "usage": "mutable work authority: markdown, jira, linear, or none",
           "type": "string"
@@ -1938,10 +3505,26 @@
           "type": "bool"
         },
         {
+          "name": "json",
+          "usage": "emit routing evidence as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "no-color",
           "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
+        },
+        {
+          "name": "policy",
+          "usage": "repository-owned routing JSON (or skills-routing config)",
+          "type": "string"
+        },
+        {
+          "name": "source",
+          "usage": "skills source override (then SKILLS_SRC)",
+          "type": "string"
         }
       ]
     },
@@ -2244,7 +3827,7 @@
     {
       "path": "baari thread lint-roster",
       "use": "baari thread lint-roster",
-      "short": "Flag awaiting: values not on the owning repo's docs/agents/00-roster.md (BAARI-004)",
+      "short": "Flag awaiting: values not on the owning repo's configured roster marker (BAARI-004)",
       "runnable": true,
       "flags": [
         {
@@ -2816,6 +4399,849 @@
       ]
     },
     {
+      "path": "baari work",
+      "use": "baari work",
+      "short": "Manage local work and qualified provider pointers",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for work",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work add",
+      "use": "baari work add",
+      "short": "Add a local group/task/bug or an owning-source pointer",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for add",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "input",
+          "usage": "closed JSON work item file",
+          "type": "string"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work alias",
+      "use": "baari work alias \u003cid\u003e \u003calias\u003e",
+      "short": "Add an identity alias without creating another owning record",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for alias",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work bind",
+      "use": "baari work bind \u003cnew-id\u003e",
+      "short": "Bind an existing provider issue through a live immutable identity read",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "connection",
+          "usage": "named provider connection",
+          "type": "string"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for bind",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "provider-id",
+          "usage": "immutable provider issue ID",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work connection",
+      "use": "baari work connection",
+      "short": "Declare named provider connections without creating tickets",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for connection",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work connection add",
+      "use": "baari work connection add",
+      "short": "",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for add",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "input",
+          "usage": "closed JSON connection file (credential environment names only)",
+          "type": "string"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work doctor",
+      "use": "baari work doctor",
+      "short": "Check ownership boundaries, pending requests and credential availability",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for doctor",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work evidence",
+      "use": "baari work evidence",
+      "short": "Reject failed or stale acceptance evidence",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for evidence",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "input",
+          "usage": "repository-relative generated evidence file",
+          "type": "string"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "plan",
+          "usage": "repository-relative lean plan",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work init",
+      "use": "baari work init",
+      "short": "Create an empty work manifest without migrating existing work",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for init",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work ledger",
+      "use": "baari work ledger",
+      "short": "Join owning workflow observations with derived Git delivery evidence",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "evidence",
+          "usage": "explicit generated receipt to freshly validate against --plan; never runs checks",
+          "type": "string"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for ledger",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "plan",
+          "usage": "explicit repository-relative lean plan to join readiness, acceptance and sequence",
+          "type": "string"
+        },
+        {
+          "name": "ref",
+          "usage": "Git reachability ref for delivery derivation",
+          "default": "HEAD",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work link",
+      "use": "baari work link \u003cid\u003e",
+      "short": "Add a local dependency or explicitly link same-provider issues",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "allow-non-atomic",
+          "usage": "acknowledge provider link race",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for link",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "provider-revision",
+          "usage": "expected provider revision",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        },
+        {
+          "name": "to",
+          "usage": "dependency work ID",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work list",
+      "use": "baari work list",
+      "short": "List owned local records/pointers, or read one provider connection",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "connection",
+          "usage": "read this named provider connection",
+          "type": "string"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for list",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work promote",
+      "use": "baari work promote \u003clocal-id\u003e",
+      "short": "Create provider work once; uncertain outcomes require explicit reconciliation",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "connection",
+          "usage": "named connection to own promoted work",
+          "type": "string"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for promote",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "reconcile-id",
+          "usage": "confirmed immutable provider ID for an existing pending create",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work ready",
+      "use": "baari work ready",
+      "short": "Resolve a lean plan into one bounded handoff",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for ready",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "plan",
+          "usage": "repository-relative baari-plan/v1 Markdown contract",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work sequence-preview",
+      "use": "baari work sequence-preview",
+      "short": "Preview an explicit wave assignment from a ready work handoff",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "dependency",
+          "usage": "explicit WORK=SPEC mapping; provider WORK is connection:immutable-id, SPEC relative to sequence directory",
+          "default": "[]",
+          "type": "stringArray"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for sequence-preview",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "plan",
+          "usage": "repository-relative native baari-plan/v1",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        },
+        {
+          "name": "source",
+          "usage": "repository-relative existing sequence/v1 (or sequence-source config)",
+          "type": "string"
+        },
+        {
+          "name": "to",
+          "usage": "explicit existing target wave",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work show",
+      "use": "baari work show \u003cid\u003e",
+      "short": "Resolve a work item's single owning source",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for show",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work supersede",
+      "use": "baari work supersede \u003cid\u003e",
+      "short": "Record an explicit replacement while preserving the original owning record",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "by",
+          "usage": "replacement owning work ID or alias",
+          "type": "string"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for supersede",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work update",
+      "use": "baari work update \u003cid\u003e",
+      "short": "Update the owning record; provider writes report non-atomic protection",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "allow-non-atomic",
+          "usage": "acknowledge provider updates lack verified atomic compare-and-swap",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for update",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "input",
+          "usage": "closed JSON replacement local item or provider field change",
+          "type": "string"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "provider-revision",
+          "usage": "expected provider observation revision",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work verify",
+      "use": "baari work verify",
+      "short": "Execute declared acceptance checks and record revision-bound evidence",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for verify",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit evidence JSON on stdout and check progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "output",
+          "usage": "repository-relative evidence output (typically .baari/evidence/\u003cplan\u003e.json)",
+          "type": "string"
+        },
+        {
+          "name": "plan",
+          "usage": "repository-relative lean plan",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "path": "baari worktree",
       "use": "baari worktree",
       "short": "Checkouts of a repository: list, and prune ones nothing would be lost from",
@@ -2833,6 +5259,56 @@
           "usage": "disable color in human terminal output",
           "default": "false",
           "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari worktree guard",
+      "use": "baari worktree guard \u003coperation\u003e",
+      "short": "Report whether a tree-wide operation reaches uncommitted work",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for guard",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit the measured blast radius as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "list",
+          "usage": "list the operation policy",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "policy",
+          "usage": "JSON operation policy input; generic defaults when omitted",
+          "type": "string"
+        },
+        {
+          "name": "quiet",
+          "usage": "report through exit status only",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository to inspect",
+          "default": ".",
+          "type": "string"
         }
       ]
     },
