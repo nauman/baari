@@ -803,14 +803,14 @@ baari docs sequence build \
             </tr>
             <tr>
               <td>Network</td>
-              <td><code class="inline">upgrade</code>, optional <code class="inline">auth</code></td>
-              <td>Upgrade checks releases. Auth delegates access checks and sync to your authenticated GitHub CLI.</td>
+              <td><code class="inline">upgrade</code>, <code class="inline">auth</code>, configured <code class="inline">work</code>, <code class="inline">release</code>, <code class="inline">docs publish</code></td>
+              <td>Network operations run when explicitly selected. Upgrade checks releases; auth, tracker work and publication use their configured providers.</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="callout">
-        <p><strong>There is no Baari account, cloud workspace, telemetry client, listener, or resident process in the current release.</strong> Normal coordination and documentation checks run against files already on your machine.</p>
+        <p><strong>There is no Baari account or telemetry client.</strong> Local coordination and documentation inspection use files on your machine. Explicit provider and publication commands use their configured network services; the visual companion starts a local server only when requested and provides a stop command.</p>
       </div>
     </section>
 
