@@ -2,7 +2,11 @@
 
 Public distribution repository for Baari, a local-first CLI for cross-repo
 coordination, documentation health, delivery sequences, CI guardrails,
-worktrees, and test databases.
+worktrees, and test databases. Native work supports local groups/tasks/bugs,
+Markdown owner pointers and named Jira/Linear connections. Lean plans bind
+Architecture/Design and executable acceptance; revision-bound evidence and
+derived ledgers keep workflow, verification and Git delivery distinct. Release,
+publication and configured external-runner operations use the same CLI.
 
 This repository contains the install page, standalone installer, and
 checksummed release binaries. `commands.json` is the latest versioned command
