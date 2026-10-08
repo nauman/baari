@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.22.1",
+  "version": "0.22.2",
   "commands": [
     {
       "path": "baari",
@@ -4299,7 +4299,7 @@
     {
       "path": "baari upgrade",
       "use": "baari upgrade",
-      "short": "Update baari to the latest release (the only command that uses the network)",
+      "short": "Update baari to the latest release",
       "runnable": true,
       "flags": [
         {
