@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.22.2",
+  "version": "0.22.3",
   "commands": [
     {
       "path": "baari",
