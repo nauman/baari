@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.22.3",
+  "version": "0.23.0",
   "commands": [
     {
       "path": "baari",
@@ -2775,6 +2775,33 @@
         {
           "name": "no-color",
           "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "path": "baari rails test",
+      "use": "baari rails test [repo] [-- test args]",
+      "short": "Run bin/rails test under the machine-wide suite lock",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for test",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-wait",
+          "usage": "refuse instead of queueing behind a running suite",
           "default": "false",
           "type": "bool"
         }
