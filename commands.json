@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.23.0",
+  "version": "0.24.0",
   "commands": [
     {
       "path": "baari",
@@ -2974,6 +2974,27 @@
           "usage": "repository whose full gate and release policy apply",
           "default": ".",
           "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari release deny-terms",
+      "use": "baari release deny-terms [comma-list|none]",
+      "short": "Set or show this machine's private client terms for the release privacy check",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for deny-terms",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
         }
       ]
     },
