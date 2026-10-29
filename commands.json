@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.24.0",
+  "version": "0.25.0",
   "commands": [
     {
       "path": "baari",
@@ -1310,7 +1310,7 @@
         },
         {
           "name": "strict",
-          "usage": "exit non-zero on any finding",
+          "usage": "exit non-zero on any finding not excused by docs-stage-allowances",
           "default": "false",
           "type": "bool"
         }
