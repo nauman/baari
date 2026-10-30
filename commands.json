@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.25.0",
+  "version": "0.26.0",
   "commands": [
     {
       "path": "baari",
@@ -1588,14 +1588,49 @@
     {
       "path": "baari docs plan new",
       "use": "baari docs plan new \u003cid\u003e \u003cslug\u003e \u003ctitle\u003e",
-      "short": "Create one Markdown plan and optional generated HTML",
+      "short": "Create one Markdown plan, record its sequence entry, and optional generated HTML",
       "runnable": true,
       "flags": [
         {
+          "name": "adr",
+          "usage": "link to an ADR the plan builds on (repeatable)",
+          "default": "[]",
+          "type": "stringSlice"
+        },
+        {
+          "name": "after",
+          "usage": "spec paths this plan depends on, as the sequence registry names them (needs --wave)",
+          "default": "[]",
+          "type": "stringSlice"
+        },
+        {
+          "name": "architecture",
+          "usage": "link to governing Architecture (repeatable)",
+          "default": "[]",
+          "type": "stringSlice"
+        },
+        {
+          "name": "design",
+          "usage": "link to applicable Design (repeatable)",
+          "default": "[]",
+          "type": "stringSlice"
+        },
+        {
           "name": "directory",
-          "usage": "repository-relative plans directory",
-          "default": "docs/plans",
+          "usage": "repository-relative plans directory (default: resolved from .baari.yml)",
           "type": "string"
+        },
+        {
+          "name": "dry-run",
+          "usage": "print the plan and sequence entry that would be written; write nothing",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "headless",
+          "usage": "the plan has no UI, so it links no Design",
+          "default": "false",
+          "type": "bool"
         },
         {
           "name": "help",
@@ -1612,7 +1647,7 @@
         },
         {
           "name": "json",
-          "usage": "emit created paths as JSON",
+          "usage": "emit the result as JSON",
           "default": "false",
           "type": "bool"
         },
@@ -1629,6 +1664,11 @@
           "type": "string"
         },
         {
+          "name": "sequence",
+          "usage": "repository-relative sequence/v1 registry (default: resolved from .baari.yml)",
+          "type": "string"
+        },
+        {
           "name": "templates",
           "usage": "template input directory (required for a variation)",
           "type": "string"
@@ -1639,10 +1679,20 @@
           "type": "string"
         },
         {
+          "name": "wave",
+          "usage": "record the plan in this existing wave of the sequence registry",
+          "type": "string"
+        },
+        {
           "name": "work",
           "usage": "reference to the owning work item",
-          "default": "\u003cOWNING_WORK_REFERENCE\u003e",
           "type": "string"
+        },
+        {
+          "name": "workbench",
+          "usage": "link to the Workbench note the plan came from (repeatable)",
+          "default": "[]",
+          "type": "stringSlice"
         }
       ]
     },
@@ -1952,8 +2002,7 @@
         },
         {
           "name": "source",
-          "usage": "sequence/v1 registry",
-          "default": "docs/sequence.yml",
+          "usage": "sequence/v1 registry (default: resolved from .baari.yml, else docs/sequence.yml)",
           "type": "string"
         }
       ]
@@ -1985,8 +2034,7 @@
         },
         {
           "name": "source",
-          "usage": "sequence/v1 registry",
-          "default": "docs/sequence.yml",
+          "usage": "sequence/v1 registry (default: resolved from .baari.yml, else docs/sequence.yml)",
           "type": "string"
         },
         {
@@ -2023,8 +2071,7 @@
         },
         {
           "name": "output",
-          "usage": "output path without extension",
-          "default": "docs/plans/00-delivery-sequence",
+          "usage": "output path without extension (default: 00-delivery-sequence in the configured plans directory)",
           "type": "string"
         },
         {
@@ -2034,8 +2081,7 @@
         },
         {
           "name": "source",
-          "usage": "sequence/v1 registry",
-          "default": "docs/sequence.yml",
+          "usage": "sequence/v1 registry (default: resolved from .baari.yml, else docs/sequence.yml)",
           "type": "string"
         }
       ],
@@ -2068,8 +2114,7 @@
         },
         {
           "name": "source",
-          "usage": "sequence/v1 registry",
-          "default": "docs/sequence.yml",
+          "usage": "sequence/v1 registry (default: resolved from .baari.yml, else docs/sequence.yml)",
           "type": "string"
         }
       ]
@@ -2095,8 +2140,7 @@
         },
         {
           "name": "source",
-          "usage": "sequence/v1 registry",
-          "default": "docs/sequence.yml",
+          "usage": "sequence/v1 registry (default: resolved from .baari.yml, else docs/sequence.yml)",
           "type": "string"
         }
       ]
@@ -2143,8 +2187,7 @@
         },
         {
           "name": "source",
-          "usage": "sequence/v1 registry",
-          "default": "docs/sequence.yml",
+          "usage": "sequence/v1 registry (default: resolved from .baari.yml, else docs/sequence.yml)",
           "type": "string"
         },
         {
