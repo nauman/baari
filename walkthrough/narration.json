@@ -1,0 +1,32 @@
+[
+  {
+    "chapter": 1,
+    "title": "One outcome, one record",
+    "text": "An agent can write code and still leave the next person guessing. Baari connects the agreed outcome, its architecture, checks and history in one daily flow."
+  },
+  {
+    "chapter": 2,
+    "title": "Architecture sets the boundary",
+    "text": "Here is a small example: download an invoice as a CSV. The architecture keeps authorization in the service and formatting in the exporter. The work item names that boundary and its acceptance checks."
+  },
+  {
+    "chapter": 3,
+    "title": "Start bounded work",
+    "text": "Start the item and Baari returns the handoff. The wave groups the delivery. It does not create another ticket. Missing architecture or acceptance is a blocker, not an invitation to keep building."
+  },
+  {
+    "chapter": 4,
+    "title": "Check the actual behaviour",
+    "text": "Now run the declared checks. This demo verifies the CSV and rejects access to another customer\u2019s invoice. The receipt belongs to the current inputs, so changing those inputs can make the proof stale."
+  },
+  {
+    "chapter": 5,
+    "title": "Reconcile without inventing progress",
+    "text": "Reconcile joins the available facts and reports gaps. It reads by default. Finish records the verified outcome, but it does not commit, release or turn local success into a shipped claim."
+  },
+  {
+    "chapter": 6,
+    "title": "Leave a useful handoff",
+    "text": "The worklog brings the activity and evidence together. Claude, Codex or Gemini can pick up from the same repository records. Less ceremony, with the architecture and proof still underneath."
+  }
+]
