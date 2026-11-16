@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.27.1",
+  "version": "0.27.2",
   "commands": [
     {
       "path": "baari",
@@ -3750,12 +3750,12 @@
     {
       "path": "baari testdb prune",
       "use": "baari testdb prune",
-      "short": "Drop test databases whose checkout no longer exists (dry run unless --confirm)",
+      "short": "Inspect unclaimed test databases; refuse deletion without ownership proof",
       "runnable": true,
       "flags": [
         {
           "name": "confirm",
-          "usage": "actually drop the databases listed by the dry run",
+          "usage": "request deletion; refused without positive ownership proof",
           "default": "false",
           "type": "bool"
         },
