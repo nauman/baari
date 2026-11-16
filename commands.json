@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.27.0",
+  "version": "0.27.1",
   "commands": [
     {
       "path": "baari",
@@ -506,7 +506,7 @@
         },
         {
           "name": "format",
-          "usage": "output format: terminal, md, html or json",
+          "usage": "output format: terminal, md, html, json, schema or ledger",
           "default": "terminal",
           "type": "string"
         },
@@ -537,7 +537,7 @@
         },
         {
           "name": "write",
-          "usage": "regenerate both committed Baari capability projections from their sources",
+          "usage": "regenerate capability matrix, mindmap, JSON snapshot/schema and command ledger from their sources",
           "default": "false",
           "type": "bool"
         }
@@ -4469,6 +4469,204 @@
       ]
     },
     {
+      "path": "baari wave",
+      "use": "baari wave",
+      "short": "Inspect and explicitly define work delivery waves",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact observed sequence revision for a protected definition write",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for wave",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "explicit work manifest; otherwise repository configuration",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari wave define",
+      "use": "baari wave define \u003cwave\u003e",
+      "short": "Explicitly define a wave; does not infer or assign work",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "after",
+          "usage": "wave prerequisite IDs",
+          "default": "[]",
+          "type": "stringSlice"
+        },
+        {
+          "name": "exit",
+          "usage": "observable exit criterion",
+          "type": "string"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact observed sequence revision for a protected definition write",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for define",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "explicit work manifest; otherwise repository configuration",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "parent",
+          "usage": "existing parent wave",
+          "type": "string"
+        },
+        {
+          "name": "program",
+          "usage": "optional repository-owned program filter",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "usage": "purpose of this delivery wave",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari wave list",
+      "use": "baari wave list",
+      "short": "List wave definitions and work membership",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact observed sequence revision for a protected definition write",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for list",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "explicit work manifest; otherwise repository configuration",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari wave show",
+      "use": "baari wave show \u003cwave\u003e",
+      "short": "Show one wave, members, blockers and exit evidence",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact observed sequence revision for a protected definition write",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for show",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "explicit work manifest; otherwise repository configuration",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "path": "baari whoami",
       "use": "baari whoami",
       "short": "Print the active actor and every alias you own",
@@ -4492,12 +4690,12 @@
     {
       "path": "baari work",
       "use": "baari work",
-      "short": "Manage local work and qualified provider pointers",
-      "runnable": false,
+      "short": "Manage work contracts, portable activity and qualified provider pointers",
+      "runnable": true,
       "flags": [
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
@@ -4508,6 +4706,12 @@
           "type": "bool"
         },
         {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "manifest",
           "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
           "type": "string"
@@ -4519,8 +4723,13 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -4528,13 +4737,13 @@
     },
     {
       "path": "baari work add",
-      "use": "baari work add",
-      "short": "Add a local group/task/bug or an owning-source pointer",
+      "use": "baari work add [title]",
+      "short": "Create one daily work item, or add an explicit legacy JSON record",
       "runnable": true,
       "flags": [
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
@@ -4545,9 +4754,20 @@
           "type": "bool"
         },
         {
-          "name": "input",
-          "usage": "closed JSON work item file",
+          "name": "id",
+          "usage": "optional stable daily ID; generated when omitted",
           "type": "string"
+        },
+        {
+          "name": "input",
+          "usage": "closed JSON legacy work item file",
+          "type": "string"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
         },
         {
           "name": "manifest",
@@ -4561,8 +4781,13 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -4576,13 +4801,19 @@
       "flags": [
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for alias",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
           "default": "false",
           "type": "bool"
         },
@@ -4598,8 +4829,130 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work assign",
+      "use": "baari work assign \u003cid\u003e",
+      "short": "Explicitly assign a work item to a wave and add dependencies",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "after",
+          "usage": "dependency work IDs to add; omission preserves existing dependencies",
+          "default": "[]",
+          "type": "stringSlice"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for assign",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path; repeat only for consolidated read-only work log",
+          "default": ".",
+          "type": "string"
+        },
+        {
+          "name": "wave",
+          "usage": "declared target wave ID",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work attest",
+      "use": "baari work attest \u003cid\u003e",
+      "short": "Record an identified criterion review with revision-bound evidence",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "criterion",
+          "usage": "existing acceptance criterion ID",
+          "type": "string"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for attest",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "input",
+          "usage": "closed JSON reviewer, result and evidence references",
+          "type": "string"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -4618,13 +4971,19 @@
         },
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for bind",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
           "default": "false",
           "type": "bool"
         },
@@ -4640,13 +4999,66 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "provider-id",
           "usage": "immutable provider issue ID",
           "type": "string"
         },
         {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work check",
+      "use": "baari work check \u003cid\u003e",
+      "short": "Run declared automated acceptance and record portable evidence",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for check",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -4660,13 +5072,19 @@
       "flags": [
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for connection",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
           "default": "false",
           "type": "bool"
         },
@@ -4682,8 +5100,13 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -4697,7 +5120,7 @@
       "flags": [
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
@@ -4713,6 +5136,12 @@
           "type": "string"
         },
         {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "manifest",
           "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
           "type": "string"
@@ -4724,8 +5153,114 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work criterion",
+      "use": "baari work criterion",
+      "short": "Attach validation metadata to an existing legacy prose criterion",
+      "runnable": false,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for criterion",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path; repeat only for consolidated read-only work log",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work criterion bind",
+      "use": "baari work criterion bind \u003cid\u003e",
+      "short": "Bind named validation to its existing prose reference without another plan",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for bind",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "input",
+          "usage": "closed JSON reference, criterion, architecture and design/headless fields",
+          "type": "string"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -4739,13 +5274,19 @@
       "flags": [
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for doctor",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
           "default": "false",
           "type": "bool"
         },
@@ -4761,8 +5302,66 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work edit",
+      "use": "baari work edit \u003cid\u003e",
+      "short": "Edit the one owning work contract with a source-revision check",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for edit",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "input",
+          "usage": "edited owning Markdown file; otherwise opens VISUAL/EDITOR",
+          "type": "string"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -4776,7 +5375,7 @@
       "flags": [
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
@@ -4792,6 +5391,12 @@
           "type": "string"
         },
         {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "manifest",
           "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
           "type": "string"
@@ -4803,14 +5408,72 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "plan",
           "usage": "repository-relative lean plan",
           "type": "string"
         },
         {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work finish",
+      "use": "baari work finish \u003cid\u003e",
+      "short": "Record an outcome after current required acceptance; does not commit or ship",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for finish",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path; repeat only for consolidated read-only work log",
+          "default": ".",
+          "type": "string"
+        },
+        {
+          "name": "summary",
+          "usage": "observed outcome of this bounded work",
           "type": "string"
         }
       ]
@@ -4822,14 +5485,26 @@
       "runnable": true,
       "flags": [
         {
+          "name": "daily",
+          "usage": "explicitly create a one-item manifest; refuses silent legacy migration",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for init",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
           "default": "false",
           "type": "bool"
         },
@@ -4845,8 +5520,13 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -4865,13 +5545,19 @@
         },
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for ledger",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
           "default": "false",
           "type": "bool"
         },
@@ -4887,6 +5573,11 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "plan",
           "usage": "explicit repository-relative lean plan to join readiness, acceptance and sequence",
           "type": "string"
@@ -4899,7 +5590,7 @@
         },
         {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -4919,13 +5610,19 @@
         },
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for link",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
           "default": "false",
           "type": "bool"
         },
@@ -4941,13 +5638,18 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "provider-revision",
           "usage": "expected provider revision",
           "type": "string"
         },
         {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         },
@@ -4971,13 +5673,19 @@
         },
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for list",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
           "default": "false",
           "type": "bool"
         },
@@ -4993,8 +5701,146 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work log",
+      "use": "baari work log [id] [context]",
+      "short": "Read consolidated activity or explicitly append useful context",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for log",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path; repeat only for consolidated read-only work log",
+          "default": ".",
+          "type": "string"
+        },
+        {
+          "name": "since",
+          "usage": "inclusive date or RFC3339 instant",
+          "type": "string"
+        },
+        {
+          "name": "timezone",
+          "usage": "IANA timezone for date-only boundaries; reported explicitly",
+          "default": "UTC",
+          "type": "string"
+        },
+        {
+          "name": "until",
+          "usage": "exclusive date or RFC3339 instant",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work migrate",
+      "use": "baari work migrate",
+      "short": "Preview explicit legacy ownership migration; apply only that exact preview",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "apply",
+          "usage": "apply the exact previously previewed ownership migration",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for migrate",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "id",
+          "usage": "existing canonical work ID to migrate explicitly",
+          "type": "string"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
+          "name": "path",
+          "usage": "repository-relative resulting item path",
+          "type": "string"
+        },
+        {
+          "name": "plan",
+          "usage": "existing explicitly related lean plan; never inferred from a title",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -5013,13 +5859,19 @@
         },
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for promote",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
           "default": "false",
           "type": "bool"
         },
@@ -5035,13 +5887,72 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "reconcile-id",
           "usage": "confirmed immutable provider ID for an existing pending create",
           "type": "string"
         },
         {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work quality",
+      "use": "baari work quality \u003cid\u003e",
+      "short": "Read optional stack/architecture advice and a repository-owned modular example",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for quality",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
+          "name": "policy",
+          "usage": "repository-owned optional stack guidance policy",
+          "default": ".baari/work-quality.json",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -5055,13 +5966,19 @@
       "flags": [
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for ready",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
           "default": "false",
           "type": "bool"
         },
@@ -5077,13 +5994,120 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "plan",
           "usage": "repository-relative baari-plan/v1 Markdown contract",
           "type": "string"
         },
         {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work reconcile",
+      "use": "baari work reconcile [id]",
+      "short": "Observe evidence and gaps; apply only an exact projection proposal explicitly",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "apply",
+          "usage": "write declared projections only after checking the exact observed revision",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "expect-revision",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for reconcile",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path; repeat only for consolidated read-only work log",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work recover",
+      "use": "baari work recover",
+      "short": "Explicitly recover an interrupted daily-work transaction",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for recover",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -5103,13 +6127,19 @@
         },
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for sequence-preview",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
           "default": "false",
           "type": "bool"
         },
@@ -5125,13 +6155,18 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "plan",
           "usage": "repository-relative native baari-plan/v1",
           "type": "string"
         },
         {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         },
@@ -5155,13 +6190,19 @@
       "flags": [
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for show",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
           "default": "false",
           "type": "bool"
         },
@@ -5177,8 +6218,61 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
+          "default": ".",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari work start",
+      "use": "baari work start \u003cid\u003e",
+      "short": "Start bounded ready work and return its source-bound handoff",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "expect-revision",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
+          "type": "string"
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for start",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "manifest",
+          "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
+          "type": "string"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
+          "name": "repo",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -5197,13 +6291,19 @@
         },
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
           "name": "help",
           "shorthand": "h",
           "usage": "help for supersede",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
           "default": "false",
           "type": "bool"
         },
@@ -5219,8 +6319,13 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -5240,7 +6345,7 @@
         },
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
@@ -5256,6 +6361,12 @@
           "type": "string"
         },
         {
+          "name": "json",
+          "usage": "emit versioned JSON on stdout; progress on stderr",
+          "default": "false",
+          "type": "bool"
+        },
+        {
           "name": "manifest",
           "usage": "repository-relative baari-work/v1 manifest (or work-manifest config)",
           "type": "string"
@@ -5267,13 +6378,18 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "provider-revision",
           "usage": "expected provider observation revision",
           "type": "string"
         },
         {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
@@ -5287,7 +6403,7 @@
       "flags": [
         {
           "name": "expect-revision",
-          "usage": "exact manifest SHA-256; pass literal absent for first creation",
+          "usage": "exact owning-source SHA-256; legacy writes require it; daily writes compare the observed revision",
           "type": "string"
         },
         {
@@ -5315,6 +6431,11 @@
           "type": "bool"
         },
         {
+          "name": "operation-id",
+          "usage": "stable operation identity for an explicitly retried daily write",
+          "type": "string"
+        },
+        {
           "name": "output",
           "usage": "repository-relative evidence output (typically .baari/evidence/\u003cplan\u003e.json)",
           "type": "string"
@@ -5326,7 +6447,7 @@
         },
         {
           "name": "repo",
-          "usage": "repository path",
+          "usage": "repository path; repeat only for consolidated read-only work log",
           "default": ".",
           "type": "string"
         }
