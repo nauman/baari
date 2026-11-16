@@ -41,8 +41,9 @@ intro = (ROOT / 'walkthrough/README.md').read_text()
 intro = intro.replace('[narration.json](narration.json)', '[narration.json](https://github.com/nauman/baari/blob/main/walkthrough/narration.json)')
 walkthrough = intro + '\n\n![Play the narrated invoice walkthrough](walkthrough.media/baari-workflow.mp4)\n\n'
 walkthrough += '[Download the MP4](walkthrough.media/baari-workflow.mp4) · [Captions](walkthrough.media/baari-workflow.srt)\n\n'
-walkthrough += '71.28 seconds · 1920 × 1080 · AI-generated Aiden voice. Sentence captions use proportional timing, not forced alignment.\n\n## Transcript\n\n'
-walkthrough += '\n\n'.join('### ' + c['title'] + '\n\n' + c['text'] for c in narration) + '\n'
+duration = round(sum(clip['duration'] for clip in narration), 2)
+walkthrough += f'{duration:g} seconds · 1920 × 1080 · AI-generated Aiden voice. Sentence captions use proportional timing, not forced alignment.\n\nApproved by Nauman on 17 November 2026.\n\n## Transcript\n\n'
+walkthrough += '\n\n'.join('### ' + c['title'] + '\n\n' + c['text'].replace('baari dot quicker dot co', 'baari.kuickr.co') for c in narration) + '\n'
 (output / 'walkthrough.md').write_text(walkthrough)
 
 # Social drafts are maintained in Distribution, never regenerated here.

@@ -1,32 +1,65 @@
 [
   {
     "chapter": 1,
-    "title": "One outcome, one record",
-    "text": "An agent can write code and still leave the next person guessing. Baari connects the agreed outcome, its architecture, checks and history in one daily flow."
+    "title": "Meet Baari",
+    "text": "Baari is a local first tool for developers and coding agents. It connects bounded work, architecture and handoffs, so the next session knows where to begin.",
+    "audio": "voice-1.wav",
+    "duration": 9.12
   },
   {
     "chapter": 2,
-    "title": "Architecture sets the boundary",
-    "text": "Here is a small example: download an invoice as a CSV. The architecture keeps authorization in the service and formatting in the exporter. The work item names that boundary and its acceptance checks."
+    "title": "See the coordination",
+    "text": "The local dashboard shows replies and repository checks in one read only view. It reads the same records as the CLI, so you can see what needs attention without giving it control of your agents.",
+    "audio": "voice-2.wav",
+    "duration": 12.48
   },
   {
     "chapter": 3,
-    "title": "Start bounded work",
-    "text": "Start the item and Baari returns the handoff. The wave groups the delivery. It does not create another ticket. Missing architecture or acceptance is a blocker, not an invitation to keep building."
+    "title": "Keep the conversation",
+    "text": "Threads name the next owner and the next action. Revision checked replies preserve the conversation. Claude, Codex and Gemini can follow the same repository contract.",
+    "audio": "voice-3.wav",
+    "duration": 11.2
   },
   {
     "chapter": 4,
-    "title": "Check the actual behaviour",
-    "text": "Now run the declared checks. This demo verifies the CSV and rejects access to another customer\u2019s invoice. The receipt belongs to the current inputs, so changing those inputs can make the proof stale."
+    "title": "Architecture sets the boundary",
+    "text": "Here is a small example: download an invoice as a CSV. The architecture keeps authorization in the service and formatting in the exporter. The work item names that boundary and its acceptance checks.",
+    "audio": "voice-4.wav",
+    "duration": 13.2
   },
   {
     "chapter": 5,
-    "title": "Reconcile without inventing progress",
-    "text": "Reconcile joins the available facts and reports gaps. It reads by default. Finish records the verified outcome, but it does not commit, release or turn local success into a shipped claim."
+    "title": "Start bounded work",
+    "text": "Start the item and Baari returns the handoff. The wave groups the delivery. It does not create another ticket. Missing architecture or acceptance is a blocker, not an invitation to keep building.",
+    "audio": "voice-5.wav",
+    "duration": 12.24
   },
   {
     "chapter": 6,
+    "title": "Check the actual behaviour",
+    "text": "Now run the declared checks. This demo verifies the CSV and rejects access to another customer\u2019s invoice. The receipt belongs to the current inputs, so changing those inputs can make the proof stale.",
+    "audio": "voice-6.wav",
+    "duration": 12.72
+  },
+  {
+    "chapter": 7,
+    "title": "Reconcile the facts",
+    "text": "Reconcile joins the available facts and reports gaps. It reads by default. Finish records the verified outcome, but it does not commit, release or turn local success into a shipped claim.",
+    "audio": "voice-7.wav",
+    "duration": 12.32
+  },
+  {
+    "chapter": 8,
     "title": "Leave a useful handoff",
-    "text": "The worklog brings the activity and evidence together. Claude, Codex or Gemini can pick up from the same repository records. Less ceremony, with the architecture and proof still underneath."
+    "text": "The worklog brings the activity and evidence together. Claude, Codex or Gemini can pick up from the same repository records. Less ceremony, with the architecture and proof still underneath.",
+    "audio": "voice-8.wav",
+    "duration": 10.72
+  },
+  {
+    "chapter": 9,
+    "title": "Start with one repository",
+    "text": "That is Baari: bounded work, visible coordination and a shared history. Visit baari dot quicker dot co, install with Homebrew, and start with baari explain.",
+    "audio": "voice-9.wav",
+    "duration": 11.44
   }
 ]

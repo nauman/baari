@@ -1,7 +1,13 @@
-# Invoice-download walkthrough
+# Baari walkthrough: daily work, dashboard and threads
 
-A fictional, isolated Python service example demonstrating released Baari v0.27.1
-commands. This is an explanatory demo, not a production billing integration.
+The approved revised walkthrough introduces Baari, shows its read-only local
+operator dashboard and repository threads, then follows an invoice CSV task
+through architecture, bounded work, checks, reconciliation and a shared worklog.
+It closes with the product URL, installation and `baari explain`.
+
+The isolated Python service, thread actors and dashboard registry are fictional
+demo fixtures using released Baari v0.27.1 commands. This is an explanatory demo,
+not a production billing integration.
 The video combines captured command output with explanatory title cards; it does
 not claim to record Claude, Codex or Gemini executing autonomously.
 
