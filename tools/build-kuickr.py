@@ -24,7 +24,7 @@ source = source.replace('<html lang="en">', '<html lang="en" class="np-tokens np
 source = source.replace('<style>\n:root', '<style>' + tokens + '</style>\n<style>\n:root', 1)
 # Preserve the existing layout; bind its colour/typography aliases to Nodepad.
 source = source.replace('</head>', '''<style>
-:root,[data-theme="light"],[data-theme="dark"]{--sans:var(--np-sans);--mono:var(--np-mono);--bg:var(--np-wash);--surface:var(--np-bg);--surface-deep:var(--np-paper-deep);--ink:var(--np-ink);--text:var(--np-text);--muted:var(--np-muted);--line:var(--np-line);--line-soft:var(--np-line-soft);--amber:var(--np-amber);--amber-text:var(--np-amber-text);--highlight:var(--np-highlight)}
+:root,[data-theme="light"],[data-theme="dark"]{--sans:var(--np-sans);--mono:var(--np-mono);--bg:var(--np-wash);--surface:var(--np-bg);--surface-deep:var(--np-paper-deep);--ink:var(--np-ink-runtime);--text:var(--np-text);--muted:var(--np-muted);--line:var(--np-line);--line-soft:var(--np-line-soft);--amber:var(--np-amber);--amber-text:var(--np-accent-text,var(--np-amber-text));--highlight:var(--np-highlight)}
 </style></head>''')
 # Public deployment assets never depend on private folder traversal.
 base = 'https://nauman.github.io/baari/'
