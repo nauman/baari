@@ -70,3 +70,15 @@ existing `dev-docs-74/baari/index.html` Page; do not edit the hosted projection.
 The build inlines the exact ledger so the sandbox does not need private asset
 access. New releases must rebuild and republish this projection after the release
 runner refreshes `commands.json`.
+
+## Hosted video and demo
+
+The public [YouTube walkthrough](https://youtu.be/OsDPxOch6O8) is captioned.
+Kuickr renders its native tap-to-load YouTube embed on the walkthrough page.
+The HTML landing page links a video cover to that page: a nested YouTube iframe
+in the HTML sandbox cannot access storage and remains blank. Keep the sandbox
+intact rather than substituting a non-working iframe.
+
+The virtual terminal replays fixture output when available and otherwise renders
+usage and flags from the release ledger. Replay feedback is visible even when
+the selected command is unchanged. It never executes a local command.

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>baari — coordinate work across repositories</title>
-<meta name="description" content="A local-first CLI for cross-repo agent coordination, documentation health, dependency waves, CI guardrails, worktrees, and test databases.">
+<meta name="description" content="A local-first Go CLI for people and coding agents: one work item, delivery waves, acceptance checks, a shared worklog, cross-repo threads and CI guardrails.">
 <link rel="canonical" href="https://baari.kuickr.co/">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -16,17 +16,15 @@
 <meta property="og:site_name" content="baari">
 <meta property="og:url" content="https://baari.kuickr.co/">
 <meta property="og:title" content="baari — coordinate work across repositories">
-<meta property="og:description" content="See what you owe, keep documentation healthy, and generate delivery sequences from one local source of truth.">
-<meta property="og:image" content="https://nauman.github.io/baari/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="baari — What do I owe? One view of what you owe a reply to across every repo on your machine.">
+<meta property="og:description" content="One work item, explicit delivery waves, acceptance checks and a shared worklog for people and coding agents such as Claude, Codex and Gemini. Local first, written in Go.">
+<meta property="og:image" content="https://baari.kuickr.co/launch.media/baari-launch.png">
+<meta property="og:image:alt" content="baari v0.27.1. Less ceremony. Clearer work. Architecture, work, check, worklog.">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="baari — coordinate work across repositories">
-<meta name="twitter:description" content="Cross-repo coordination, documentation health, and delivery sequences from a local-first CLI.">
-<meta name="twitter:image" content="https://nauman.github.io/baari/og-image.png">
-<meta name="twitter:image:alt" content="baari — What do I owe? One view of what you owe a reply to across every repo on your machine.">
+<meta name="twitter:description" content="One work item. Explicit waves. Acceptance checks. A shared worklog for people and coding agents. Local first, written in Go.">
+<meta name="twitter:image" content="https://baari.kuickr.co/launch.media/baari-launch.png">
+<meta name="twitter:image:alt" content="baari v0.27.1. Less ceremony. Clearer work. Architecture, work, check, worklog.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -556,12 +554,12 @@ footer {
     </div>
 
     <p class="release-line">
-      <span class="badge" id="ledger-state">loading ledger</span>
-      <a data-release-link href="https://github.com/nauman/baari/releases/latest"><span data-release-version>current release</span></a>
+      <span class="badge" id="ledger-state">release ledger</span>
+      <a data-release-link href="https://github.com/nauman/baari/releases/latest"><span data-release-version>v0.27.1</span></a>
     </p>
     <h1>Know what every repo is <em>waiting on.</em></h1>
     <p class="lede">
-      Baari is a <strong>local-first command-line tool</strong> for people and agents working across repositories. It connects bounded work, architecture, acceptance checks and a shared worklog. It also finds replies you owe, checks documentation health and shows delivery waves across repositories.
+      Baari is a <strong>local-first command-line tool</strong> for people and coding agents such as Claude, Codex and Gemini working across repositories. It connects bounded work, architecture, acceptance checks and a shared worklog, so the next session knows where to begin. It also finds replies you owe, checks documentation health and shows delivery waves across repositories.
     </p>
 
     <div class="cta">
@@ -572,14 +570,21 @@ footer {
       <a class="button-link" href="#install">Install and start</a>
     </div>
     <p class="microcopy">macOS and Linux · checksummed releases · no background daemon</p>
-    <p><a href="walkthrough/README.md">Invoice-download walkthrough and narration</a></p>
+    <figure class="walkthrough-video" style="margin:32px 0">
+      <a href="https://baari.kuickr.co/walkthrough.md" aria-label="Play the Baari walkthrough in Kuickr" style="display:block;position:relative;line-height:0">
+        <img src="https://baari.kuickr.co/launch.media/baari-launch.png" alt="Watch: Stop Losing Context Between AI Coding Sessions" style="display:block;width:100%;border-radius:13px" loading="lazy">
+        <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:22px 28px;border-radius:50%;background:#0e0d0b;color:white;font:28px/1 sans-serif" aria-hidden="true">▶</span>
+      </a>
+      <figcaption class="microcopy">See the daily workflow, agent dashboard and threads. <a href="https://youtu.be/OsDPxOch6O8">Watch on YouTube</a></figcaption>
+    </figure>
 
     <div class="terminal" aria-label="Interactive virtual Baari terminal">
       <div class="terminal-bar">
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
         <span class="terminal-title" id="terminal-title">virtual terminal · demo data</span>
       </div>
-      <pre id="terminal-output" aria-live="polite">Loading the command ledger…</pre>
+      <pre id="terminal-output" aria-live="polite">$ baari status
+Pick a demo command below. Output comes from the published release ledger.</pre>
       <form class="terminal-form" id="terminal-form">
         <span aria-hidden="true">$</span>
         <label class="visually-hidden" for="terminal-input">Virtual Baari command</label>
@@ -675,6 +680,44 @@ baari status</pre>
       </div>
     </section>
 
+    <section id="agents">
+      <h2>Agents, threads and the dashboard</h2>
+      <p class="statement">Claude, Codex and Gemini read the same repository contract, <em>not a private chat history.</em></p>
+      <p>
+        Agents get their context from the repository: its instructions, architecture, work items and threads. Threads name the next owner and the next action, and revision-checked replies keep the conversation where it already lives. The next session reads what happened instead of reconstructing an old chat.
+      </p>
+      <div class="feature-list">
+        <div class="feature">
+          <div class="number">01</div>
+          <div>
+            <h3>baari serve</h3>
+            <p>Open the local operator dashboard at <code class="inline">127.0.0.1:8421</code>. It shows replies and repository guard layers. It is read only and loopback only, and it reflects recorded activity rather than a live view inside an agent.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="number">02</div>
+          <div>
+            <h3>baari roster show</h3>
+            <p>See who is declared, who has been active recently from thread replies, and which locks are held or stale.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="number">03</div>
+          <div>
+            <h3>baari skills install</h3>
+            <p>Install the repository's own skills where Claude Code and Codex look for them, or into a shared agents folder or another checkout.</p>
+          </div>
+        </div>
+      </div>
+      <div class="command-block">
+        <p class="command-label">Before substantive agent work</p>
+        <pre class="command">baari explain
+baari status
+baari doctor
+baari ci tree</pre>
+      </div>
+    </section>
+
     <section id="daily-work">
       <h2>One item. One daily flow.</h2>
       <p class="statement">Architecture before execution. A worklog the next agent can use.</p>
@@ -694,8 +737,9 @@ baari work log WORK-001</pre>
     </section>
 
     <section>
-      <h2>Delivery waves and compatibility</h2>
-      <p class="statement">One registry becomes both an agent-readable plan and a <em>beautiful human view.</em></p>
+      <h2>Legacy sequence workflow · unmigrated repositories</h2>
+      <p class="statement">Kept for repositories that have not moved to the daily flow.</p>
+      <div class="callout"><p><strong>New repositories should use the daily flow above.</strong> There, <code class="inline">baari wave define</code> and <code class="inline">baari work assign</code> group existing work items without another copy of the task. Use the commands below only in a repository that still owns a <code class="inline">docs/sequence.yml</code>.</p></div>
       <p>
         The examples below describe the retained legacy sequence flow. An unmigrated repository owns one <code class="inline">docs/sequence.yml</code>. Global waves describe the shared delivery order; substantial programs can add dense subwaves underneath them. Specs are assigned to those waves instead of being copied into another roadmap.
       </p>
@@ -806,12 +850,12 @@ baari docs sequence build \
     </section>
 
     <section>
-      <h2>Behavior you can reason about</h2>
-      <p class="statement">Local-first does not mean pretending every command is read-only.</p>
-      <div class="table-wrap" role="region" aria-label="Baari command behavior" tabindex="0">
+      <h2>What each command touches</h2>
+      <p class="statement">Local first, not read only. Every command states what it may change.</p>
+      <div class="table-wrap" role="region" aria-label="Baari command behaviour" tabindex="0">
         <table>
           <thead>
-            <tr><th>Behavior</th><th>Commands</th><th>Boundary</th></tr>
+            <tr><th>Behaviour</th><th>Commands</th><th>Boundary</th></tr>
           </thead>
           <tbody>
             <tr>
@@ -861,7 +905,7 @@ baari docs sequence build \
       <div class="planned">
         <div class="planned-item"><h3>Explicit adoption</h3><p>Local daily work is shipped. Unsafe or ambiguous prose, group and provider-owner migrations refuse rather than create dual ownership.</p></div>
         <div class="planned-item"><h3>Evidence keeps its meaning</h3><p>Failed or stale required acceptance blocks completion. Human review must identify a real reviewer. Local tests do not establish a live provider or production deployment claim.</p></div>
-        <div class="planned-item"><h3>Bounded automation</h3><p>Serve and watch offer read-only observation. Dispatch and external runners require explicit configuration and invocation; runner success is not acceptance. Machine-local active selection and wave-exit attestation remain unsupported in the daily flow.</p></div>
+        <div class="planned-item"><h3>Bounded automation</h3><p>Serve and watch offer read-only observation. Dispatch and external runners require explicit configuration and invocation; runner success is not acceptance. Machine-local active selection and wave-exit attestation (formally signing off that a wave is complete) remain unsupported in the daily flow.</p></div>
       </div>
     </section>
 
@@ -887,7 +931,7 @@ baari docs sequence build \
 
   <footer>
     <div class="footer-links">
-      <a data-release-link href="https://github.com/nauman/baari/releases/latest"><span data-release-version>Current release</span></a>
+      <a data-release-link href="https://github.com/nauman/baari/releases/latest"><span data-release-version>v0.27.1</span></a>
       <a href="https://github.com/nauman/baari/releases">All releases</a>
       <a href="https://github.com/nauman/baari">Distribution repository</a>
       <a href="https://nauman.github.io/baari/install.sh">install.sh</a>
@@ -959,9 +1003,21 @@ baari docs sequence build \
     var ledger = null;
     var commandsByPath = new Map();
 
+    var replayTimer = null;
+    var replayCount = 0;
     function setOutput(command, text) {
-      output.textContent = "$ " + command + "\n\n" + text;
-      document.getElementById("terminal-title").textContent = command + " · demo data";
+      window.clearTimeout(replayTimer);
+      replayCount += 1;
+      output.textContent = "$ " + command + "\n\nLoading recorded demo…";
+      document.getElementById("terminal-title").textContent = command + " · replay " + replayCount;
+      var runButton = form.querySelector("button");
+      runButton.textContent = "replaying…";
+      replayTimer = window.setTimeout(function () {
+        output.textContent = "$ " + command + "\n\n" + text;
+        runButton.textContent = "run again";
+        document.getElementById("terminal-title").textContent = command + " · demo replay " + replayCount;
+        output.scrollTop = 0;
+      }, 250);
     }
 
     function renderHelp(command) {
@@ -1021,7 +1077,7 @@ baari docs sequence build \
         setOutput(resolved.normalized, resolved.command.demo);
         return;
       }
-      setOutput(resolved.normalized, resolved.command.short + "\n\nThis command exists in Baari v" + ledger.version + ", but the browser demo does not execute it.\nTry: " + resolved.command.path + " --help");
+      setOutput(resolved.normalized, renderHelp(resolved.command) + "\n\nReference preview only — run this command locally to operate on your repository.");
     }
 
     function addSuggestion(path) {

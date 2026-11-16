@@ -19,3 +19,5 @@ The work item references governing architecture, one authorization boundary and
 CSV-export acceptance. The demonstrated sequence is `work start`, `work check`,
 `work reconcile`, `work finish`, and `work log`. Wave membership is explicit.
 A workflow finish is not a commit or release.
+
+Watch on [YouTube](https://youtu.be/OsDPxOch6O8) or in the [Kuickr native embed](https://baari.kuickr.co/walkthrough.md).
