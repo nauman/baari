@@ -43,7 +43,8 @@ print(output / 'index.html')
 narration = json.loads((ROOT / 'walkthrough/narration.json').read_text())
 intro = (ROOT / 'walkthrough/README.md').read_text()
 intro = intro.replace('[narration.json](narration.json)', '[narration.json](https://github.com/nauman/baari/blob/main/walkthrough/narration.json)')
-walkthrough = intro + '\n\n{{embed:youtube:OsDPxOch6O8}}\n\n'
+heading, _, rest = intro.partition('\n')
+walkthrough = heading + '\n\n{{embed:youtube:OsDPxOch6O8}}\n\n' + rest + '\n\n'
 walkthrough += '[Download the MP4](walkthrough.media/baari-workflow.mp4) · [Captions](walkthrough.media/baari-workflow.srt)\n\n'
 duration = round(sum(clip['duration'] for clip in narration), 2)
 walkthrough += f'{duration:g} seconds · 1920 × 1080 · AI-generated Aiden voice. Sentence captions use proportional timing, not forced alignment.\n\nApproved by Nauman on 17 November 2026.\n\n## Transcript\n\n'
