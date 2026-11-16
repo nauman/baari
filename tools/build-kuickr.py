@@ -44,6 +44,3 @@ walkthrough += '[Download the MP4](walkthrough.media/baari-workflow.mp4) · [Cap
 walkthrough += '71.28 seconds · 1920 × 1080 · AI-generated Aiden voice. Sentence captions use proportional timing, not forced alignment.\n\n## Transcript\n\n'
 walkthrough += '\n\n'.join('### ' + c['title'] + '\n\n' + c['text'] for c in narration) + '\n'
 (output / 'walkthrough.md').write_text(walkthrough)
-launch = (ROOT / 'walkthrough/launch-posts.md').read_text()
-launch += '\n\n![Baari launch image](launch.media/baari-launch.png)\n'
-(output / 'launch.md').write_text(launch)
