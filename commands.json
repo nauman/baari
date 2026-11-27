@@ -1,6 +1,6 @@
 {
   "schema": "baari-command-ledger/v1",
-  "version": "0.28.0",
+  "version": "0.29.0",
   "commands": [
     {
       "path": "baari",
@@ -3615,6 +3615,38 @@
         {
           "name": "source",
           "usage": "skills source override (then SKILLS_SRC)",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "baari skills status",
+      "use": "baari skills status [repo]",
+      "short": "Report whether a repository's declared skills are installed and current",
+      "runnable": true,
+      "flags": [
+        {
+          "name": "help",
+          "shorthand": "h",
+          "usage": "help for status",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "json",
+          "usage": "emit the report as JSON",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "no-color",
+          "usage": "disable color in human terminal output",
+          "default": "false",
+          "type": "bool"
+        },
+        {
+          "name": "source",
+          "usage": "directory of skill folders to compare with (default: the configured dev-docs checkout)",
           "type": "string"
         }
       ]
